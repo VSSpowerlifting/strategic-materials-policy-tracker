@@ -1,0 +1,1072 @@
+[
+  {
+    "measureId": "ctl-ca-ica-2022-divest-chengze-lithium-chile",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2022-11-02",
+    "sourceId": "src-ca-ised-divest",
+    "until": null,
+    "note": "Ordered; the statement announces the outcome of final orders."
+  },
+  {
+    "measureId": "ctl-ca-ica-2022-divest-sinomine-power-metals",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2022-11-02",
+    "sourceId": "src-ca-ised-divest",
+    "until": null,
+    "note": "Ordered; the statement announces the outcome of final orders."
+  },
+  {
+    "measureId": "ctl-ca-ica-2022-divest-zangge-ultra-lithium",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2022-11-02",
+    "sourceId": "src-ca-ised-divest",
+    "until": null,
+    "note": "Ordered; the statement announces the outcome of final orders."
+  },
+  {
+    "measureId": "ctl-cn-56-2025-customs-declaration",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-56",
+    "until": "2025-11-08",
+    "note": "本公告自2025年11月8日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-56-2025-customs-declaration",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-56-2025-customs-declaration",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-56-2025-equipment-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-56",
+    "until": "2025-11-08",
+    "note": "本公告自2025年11月8日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-56-2025-equipment-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-56-2025-equipment-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-56-2025-raw-materials-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-56",
+    "until": "2025-11-08",
+    "note": "本公告自2025年11月8日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-56-2025-raw-materials-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-56-2025-raw-materials-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-57-2025-customs-declaration",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-57",
+    "until": "2025-11-08",
+    "note": "本公告自2025年11月8日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-57-2025-customs-declaration",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-57-2025-customs-declaration",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-57-2025-export-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-57",
+    "until": "2025-11-08",
+    "note": "本公告自2025年11月8日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-57-2025-export-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-57-2025-export-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-58-2025-battery-cathode-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-58",
+    "until": "2025-11-08",
+    "note": "本公告自2025年11月8日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-58-2025-battery-cathode-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-58-2025-battery-cathode-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-58-2025-customs-declaration",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-58",
+    "until": "2025-11-08",
+    "note": "本公告自2025年11月8日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-58-2025-customs-declaration",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-58-2025-customs-declaration",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-58-2025-graphite-anode-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-58",
+    "until": "2025-11-08",
+    "note": "本公告自2025年11月8日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-58-2025-graphite-anode-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-58-2025-graphite-anode-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-knowledge-catch-all",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-62",
+    "until": null,
+    "note": "本公告自发布之日起实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-knowledge-catch-all",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-knowledge-catch-all",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-overseas-support-ban",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-62",
+    "until": null,
+    "note": "本公告自发布之日起实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-overseas-support-ban",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-overseas-support-ban",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-production-line-technology-licensing",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-62",
+    "until": null,
+    "note": "本公告自发布之日起实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-production-line-technology-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-production-line-technology-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-technology-licensing",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-62",
+    "until": null,
+    "note": "本公告自发布之日起实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-technology-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-62-2025-technology-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-antimony-2024-export-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2024-08-15",
+    "sourceId": "src-mofcom-33",
+    "until": "2024-09-15",
+    "note": null
+  },
+  {
+    "measureId": "ctl-cn-antimony-2024-export-licensing",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2024-09-15",
+    "sourceId": "src-mofcom-33",
+    "until": null,
+    "note": "本公告自2024年9月15日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-antimony-2024-superhard-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2024-08-15",
+    "sourceId": "src-mofcom-33",
+    "until": "2024-09-15",
+    "note": null
+  },
+  {
+    "measureId": "ctl-cn-antimony-2024-superhard-licensing",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2024-09-15",
+    "sourceId": "src-mofcom-33",
+    "until": null,
+    "note": "本公告自2024年9月15日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-antismuggling-2025-strategic-minerals",
+    "sequence": 0,
+    "status": "announced",
+    "date": "2025-05-09",
+    "sourceId": "src-mofcom-antismuggling-2025",
+    "until": null,
+    "note": "Deployed at an on-site meeting in Shenzhen; the notice gives no end date."
+  },
+  {
+    "measureId": "ctl-cn-gage-2023-export-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2023-07-03",
+    "sourceId": "src-mofcom-23",
+    "until": "2023-08-01",
+    "note": "Announced 3 July 2023."
+  },
+  {
+    "measureId": "ctl-cn-gage-2023-export-licensing",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2023-08-01",
+    "sourceId": "src-mofcom-23",
+    "until": null,
+    "note": "本公告自2023年8月1日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-graphite-2023-decontrol",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2023-10-20",
+    "sourceId": "src-mofcom-39",
+    "until": "2023-12-01",
+    "note": null
+  },
+  {
+    "measureId": "ctl-cn-graphite-2023-decontrol",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2023-12-01",
+    "sourceId": "src-mofcom-39",
+    "until": null,
+    "note": "本公告自2023年12月1日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-graphite-2023-export-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2023-10-20",
+    "sourceId": "src-mofcom-39",
+    "until": "2023-12-01",
+    "note": null
+  },
+  {
+    "measureId": "ctl-cn-graphite-2023-export-licensing",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2023-12-01",
+    "sourceId": "src-mofcom-39",
+    "until": null,
+    "note": "本公告自2023年12月1日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-04-customs-declaration",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-04-04",
+    "sourceId": "src-mofcom-18",
+    "until": null,
+    "note": "本公告自发布之日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-04-export-licensing",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-04-04",
+    "sourceId": "src-mofcom-18",
+    "until": null,
+    "note": "本公告自发布之日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-advanced-chip-ai-review",
+    "sequence": 0,
+    "status": "not_stated",
+    "date": null,
+    "sourceId": "src-mofcom-61",
+    "until": null,
+    "note": "Item 4 sets a licensing decision rule. Item 8 dates only Items 1(1)–1(3). The effective date for Item 4 is undetermined, including whether it applied from publication on 9 October 2025."
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-advanced-chip-ai-review",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，…商务部公告2025年第61号…暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-advanced-chip-ai-review",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-de-minimis-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-61",
+    "until": "2025-12-01",
+    "note": "本公告\"一（一）\"和\"一（二）\"部分自2025年12月1日起实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-de-minimis-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，…商务部公告2025年第61号…暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-de-minimis-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-foreign-direct-product-licensing",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-61",
+    "until": "2025-12-01",
+    "note": "本公告\"一（一）\"和\"一（二）\"部分自2025年12月1日起实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-foreign-direct-product-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，…商务部公告2025年第61号…暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-foreign-direct-product-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-military-listed-end-users",
+    "sequence": 0,
+    "status": "not_stated",
+    "date": null,
+    "sourceId": "src-mofcom-61",
+    "until": null,
+    "note": "Item 2 sets a licensing decision rule. Item 8 dates only Items 1(1)–1(3). The effective date for Item 2 is undetermined, including whether it applied from publication on 9 October 2025."
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-military-listed-end-users",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，…商务部公告2025年第61号…暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-military-listed-end-users",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-origin-reexport-licensing",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-61",
+    "until": null,
+    "note": "本公告\"一（三）\"部分自公布之日起实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-origin-reexport-licensing",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，…商务部公告2025年第61号…暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-origin-reexport-licensing",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-prohibited-end-uses",
+    "sequence": 0,
+    "status": "not_stated",
+    "date": null,
+    "sourceId": "src-mofcom-61",
+    "until": null,
+    "note": "Item 3 sets a licensing decision rule. Item 8 dates only Items 1(1)–1(3). The effective date for Item 3 is undetermined, including whether it applied from publication on 9 October 2025."
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-prohibited-end-uses",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日，…商务部公告2025年第61号…暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-10-prohibited-end-uses",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-11-suspension",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "经批准，自即日起至2026年11月10日…暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2025-11-suspension",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2026-11-suspension-continuation",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2026-11-09",
+    "sourceId": "src-mofcom-2026-58",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-2026-11-suspension-continuation",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "经批准，自2026年11月11日起至2027年1月10日，…继续暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-ree-regs-2024-designated-enterprises",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2024-06-29",
+    "sourceId": "src-gov-cn-decree-785",
+    "until": "2024-10-01",
+    "note": "Published 29 June 2024."
+  },
+  {
+    "measureId": "ctl-cn-ree-regs-2024-designated-enterprises",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2024-10-01",
+    "sourceId": "src-gov-cn-decree-785",
+    "until": null,
+    "note": "本条例自2024年10月1日起施行。"
+  },
+  {
+    "measureId": "ctl-cn-ree-regs-2024-illegal-product-ban",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2024-06-29",
+    "sourceId": "src-gov-cn-decree-785",
+    "until": "2024-10-01",
+    "note": "Published 29 June 2024."
+  },
+  {
+    "measureId": "ctl-cn-ree-regs-2024-illegal-product-ban",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2024-10-01",
+    "sourceId": "src-gov-cn-decree-785",
+    "until": null,
+    "note": "本条例自2024年10月1日起施行。"
+  },
+  {
+    "measureId": "ctl-cn-ree-regs-2024-total-quantity-control",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2024-06-29",
+    "sourceId": "src-gov-cn-decree-785",
+    "until": "2024-10-01",
+    "note": "Published 29 June 2024."
+  },
+  {
+    "measureId": "ctl-cn-ree-regs-2024-total-quantity-control",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2024-10-01",
+    "sourceId": "src-gov-cn-decree-785",
+    "until": null,
+    "note": "本条例自2024年10月1日起施行。"
+  },
+  {
+    "measureId": "ctl-cn-ree-regs-2024-traceability",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2024-06-29",
+    "sourceId": "src-gov-cn-decree-785",
+    "until": "2024-10-01",
+    "note": "Published 29 June 2024."
+  },
+  {
+    "measureId": "ctl-cn-ree-regs-2024-traceability",
+    "sequence": 1,
+    "status": "in_force",
+    "date": "2024-10-01",
+    "sourceId": "src-gov-cn-decree-785",
+    "until": null,
+    "note": "本条例自2024年10月1日起施行。"
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2b005-b",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-55",
+    "until": "2025-11-08",
+    "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2b005-b",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2b005-b",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "Continued suspension; no inference about status after this end date."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-a",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-55",
+    "until": "2025-11-08",
+    "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-a",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-a",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "Continued suspension; no inference about status after this end date."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-b",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-55",
+    "until": "2025-11-08",
+    "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-b",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-b",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "Continued suspension; no inference about status after this end date."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-c",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-55",
+    "until": "2025-11-08",
+    "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-c",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-c",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "Continued suspension; no inference about status after this end date."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-d",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-55",
+    "until": "2025-11-08",
+    "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-d",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2c902-d",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "Continued suspension; no inference about status after this end date."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2e902",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-55",
+    "until": "2025-11-08",
+    "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2e902",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-2e902",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "Continued suspension; no inference about status after this end date."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-customs-declaration",
+    "sequence": 0,
+    "status": "scheduled",
+    "date": "2025-10-09",
+    "sourceId": "src-mofcom-55",
+    "until": "2025-11-08",
+    "note": "Announced commencement 2025-11-08; this is not evidence of any in-force interval."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-customs-declaration",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-07",
+    "sourceId": "src-mofcom-70",
+    "until": "2026-11-10",
+    "note": "Announcement No. 70 suspended implementation before No. 55's scheduled commencement."
+  },
+  {
+    "measureId": "ctl-cn-superhard-2025-55-customs-declaration",
+    "sequence": 2,
+    "status": "suspended",
+    "date": "2026-11-11",
+    "sourceId": "src-mofcom-2026-58",
+    "until": "2027-01-10",
+    "note": "Continued suspension; no inference about status after this end date."
+  },
+  {
+    "measureId": "ctl-cn-tungsten-2025-export-licensing",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-02-04",
+    "sourceId": "src-mofcom-10",
+    "until": null,
+    "note": "本公告自发布之日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-tungsten-2025-other-metals-licensing",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-02-04",
+    "sourceId": "src-mofcom-10",
+    "until": null,
+    "note": "本公告自发布之日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-us-2024-gallium-germanium-antimony-denial",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2024-12-03",
+    "sourceId": "src-mofcom-46",
+    "until": null,
+    "note": "本公告自公布之日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-us-2024-gallium-germanium-antimony-denial",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-09",
+    "sourceId": "src-mofcom-72",
+    "until": "2026-11-27",
+    "note": "自即日起至2026年11月27日，商务部公告2024年第46号第二款暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-us-2024-graphite-end-use-review",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2024-12-03",
+    "sourceId": "src-mofcom-46",
+    "until": null,
+    "note": "本公告自公布之日起正式实施。"
+  },
+  {
+    "measureId": "ctl-cn-us-2024-graphite-end-use-review",
+    "sequence": 1,
+    "status": "suspended",
+    "date": "2025-11-09",
+    "sourceId": "src-mofcom-72",
+    "until": "2026-11-27",
+    "note": "自即日起至2026年11月27日，商务部公告2024年第46号第二款暂停实施。"
+  },
+  {
+    "measureId": "ctl-cn-us-2024-military-end-use-ban",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2024-12-03",
+    "sourceId": "src-mofcom-46",
+    "until": null,
+    "note": "本公告自公布之日起正式实施。"
+  },
+  {
+    "measureId": "ctl-us-aam-2025-antidumping-investigation",
+    "sequence": 0,
+    "status": "investigation",
+    "date": "2025-01-07",
+    "sourceId": "src-fedreg-aam-ad-initiation-2025",
+    "until": null,
+    "note": "Commerce initiation, applicable 7 January 2025, on a petition received 18 December 2024."
+  },
+  {
+    "measureId": "ctl-us-aam-2025-antidumping-investigation",
+    "sequence": 1,
+    "status": "concluded",
+    "date": "2026-03-31",
+    "sourceId": "src-fedreg-itc-aam-final-2026",
+    "until": null,
+    "note": "The ITC determined that the establishment of a US industry is not materially retarded by reason of the subject imports (one commissioner dissenting); no order follows from this record."
+  },
+  {
+    "measureId": "ctl-us-aam-2025-countervailing-investigation",
+    "sequence": 0,
+    "status": "investigation",
+    "date": "2025-01-07",
+    "sourceId": "src-fedreg-aam-cvd-initiation-2025",
+    "until": null,
+    "note": "Commerce initiation, applicable 7 January 2025, on a petition received 18 December 2024."
+  },
+  {
+    "measureId": "ctl-us-aam-2025-countervailing-investigation",
+    "sequence": 1,
+    "status": "concluded",
+    "date": "2026-03-31",
+    "sourceId": "src-fedreg-itc-aam-final-2026",
+    "until": null,
+    "note": "The ITC determined that the establishment of a US industry is not materially retarded by reason of the subject imports (one commissioner dissenting); no order follows from this record."
+  },
+  {
+    "measureId": "ctl-us-chips-usar-2026-covenants",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2026-06-03",
+    "sourceId": "src-usar-8k-2026-06-03",
+    "until": null,
+    "note": "Covenants of the Funding Agreements entered into on 3 June 2026; the filing does not state their duration."
+  },
+  {
+    "measureId": "ctl-us-dod-mp-2025-ownership-covenants",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-07-09",
+    "sourceId": "src-dod-mp-transaction-agreement-2025",
+    "until": null,
+    "note": "The Transaction Documents were executed on the Effective Date. The covenants run for the Specified Period, while DoD holds more than 75% of its securities, the Offtake Agreement or PPA remains in place, or the Samarium loan is outstanding."
+  },
+  {
+    "measureId": "ctl-us-dod-mp-2025-restricted-buyers",
+    "sequence": 0,
+    "status": "in_force",
+    "date": "2025-07-09",
+    "sourceId": "src-dod-mp-transaction-agreement-2025",
+    "until": null,
+    "note": null
+  },
+  {
+    "measureId": "ctl-us-eo-14272-2025-section-232-investigation",
+    "sequence": 0,
+    "status": "investigation",
+    "date": "2025-04-15",
+    "sourceId": "src-fedreg-eo-14272",
+    "until": null,
+    "note": "The order directs the Secretary of Commerce to initiate the investigation."
+  },
+  {
+    "measureId": "ctl-us-eo-14272-2025-section-232-investigation",
+    "sequence": 1,
+    "status": "concluded",
+    "date": "2025-10-24",
+    "sourceId": "src-fedreg-proc-11001",
+    "until": null,
+    "note": "The Secretary transmitted his report to the President on 24 October 2025 (Proclamation 11001, para. 1). The proclamation, signed 14 January 2026, directs negotiations in clauses (1)–(3) and imposes no tariff or quota; it is recorded as an event, not as a control measure, because it restricts nothing."
+  }
+]

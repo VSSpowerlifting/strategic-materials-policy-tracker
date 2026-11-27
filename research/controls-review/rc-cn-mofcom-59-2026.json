@@ -1,0 +1,444 @@
+{
+  "version": 1,
+  "kind": "controls_review_overlay",
+  "overlayId": "rc-cn-mofcom-59-2026",
+  "title": "United States paragraph-2 suspension and historical graphite legal basis",
+  "reviewState": "pending_human_adjudication",
+  "preparedOn": "2026-11-27",
+  "preparedBy": "Engineering draft prepared with AI assistance. Not a human source adjudication.",
+  "sourceCheckedOn": "2026-11-27",
+  "reviewer": null,
+  "reviewedAt": null,
+  "approvedBy": null,
+  "baseline": {
+    "datasetVersion": "smpt-controls-v1-2026-11-12-be5b774228b6206368a6873fee5ab3945b116e346be85ef54e3aa4ab4a6b8ecb",
+    "asOf": "2026-11-12"
+  },
+  "operations": [
+    {
+      "op": "add_source",
+      "row": {
+        "id": "src-mofcom-2026-59",
+        "url": "https://www.mofcom.gov.cn/zcfb/dwmygl/art/2026/art_1bb17d2be5de433283d33f213f0824ef.html",
+        "title": "商务部公告2026年第59号 公布继续调整实施商务部公告2024年第46号的决定",
+        "publisher": "中华人民共和国商务部 (Ministry of Commerce, PRC)",
+        "language": "zh",
+        "datePublished": "2026-11-24",
+        "dateAccessed": "2026-11-27",
+        "sourceType": "official",
+        "confidence": "primary"
+      }
+    },
+    {
+      "op": "add_event",
+      "row": {
+        "id": "evt-cn-mofcom-72-2025",
+        "date": "2025-11-09",
+        "jurisdiction": "china",
+        "issuingBody": "MOFCOM",
+        "documentNumber": "MOFCOM Announcement No. 72 (2025)",
+        "documentLabel": "MOFCOM Announcement No. 72 of 2025: decision adjusting the implementation of MOFCOM Announcement No. 46 of 2024 (second paragraph suspended to 27 November 2026)",
+        "titleOriginal": "商务部公告2025年第72号 公布调整实施商务部公告2024年第46号的决定",
+        "titleOriginalLang": "zh",
+        "titleEnSource": "self",
+        "policyStatus": "active",
+        "mechanism": [
+          "export_control",
+          "trade_action"
+        ],
+        "affectedMaterialIds": [
+          "gallium",
+          "germanium",
+          "antimony",
+          "graphite"
+        ],
+        "verificationStatus": "provisional",
+        "supersededByEventId": null,
+        "sourceIds": [
+          "src-mofcom-72",
+          "src-mofcom-46"
+        ]
+      }
+    },
+    {
+      "op": "add_event",
+      "row": {
+        "id": "evt-cn-mofcom-59-2026",
+        "date": "2026-11-24",
+        "jurisdiction": "china",
+        "issuingBody": "MOFCOM",
+        "documentNumber": "MOFCOM Announcement No. 59 (2026)",
+        "documentLabel": "MOFCOM Announcement No. 59 of 2026: decision continuing to adjust the implementation of MOFCOM Announcement No. 46 of 2024 (second paragraph suspended 28 November 2026 to 27 January 2027)",
+        "titleOriginal": "商务部公告2026年第59号 公布继续调整实施商务部公告2024年第46号的决定",
+        "titleOriginalLang": "zh",
+        "titleEnSource": "self",
+        "policyStatus": "active",
+        "mechanism": [
+          "export_control",
+          "trade_action"
+        ],
+        "affectedMaterialIds": [
+          "gallium",
+          "germanium",
+          "antimony",
+          "graphite"
+        ],
+        "verificationStatus": "provisional",
+        "supersededByEventId": null,
+        "sourceIds": [
+          "src-mofcom-2026-59",
+          "src-mofcom-72",
+          "src-mofcom-46"
+        ]
+      }
+    },
+    {
+      "op": "add_status",
+      "measureId": "ctl-cn-us-2024-gallium-germanium-antimony-denial",
+      "entry": {
+        "status": "suspended",
+        "date": "2026-11-28",
+        "until": "2027-01-27",
+        "sourceId": "src-mofcom-2026-59",
+        "note": "经批准，自2026年11月28日起至2027年1月27日，商务部公告2024年第46号（《关于加强相关两用物项对美国出口管制的公告》）第二款暂停实施。"
+      },
+      "evidence": {
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      }
+    },
+    {
+      "op": "add_status",
+      "measureId": "ctl-cn-us-2024-graphite-end-use-review",
+      "entry": {
+        "status": "suspended",
+        "date": "2026-11-28",
+        "until": "2027-01-27",
+        "sourceId": "src-mofcom-2026-59",
+        "note": "经批准，自2026年11月28日起至2027年1月27日，商务部公告2024年第46号（《关于加强相关两用物项对美国出口管制的公告》）第二款暂停实施。"
+      },
+      "evidence": {
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      }
+    },
+    {
+      "op": "add_source",
+      "row": {
+        "id": "src-mofcom-2024-51",
+        "url": "https://www.mofcom.gov.cn/zwgk/zcfb/art/2024/art_a429e4686e0c4df39588431afbff4b83.html",
+        "title": "商务部 工业和信息化部 海关总署 国家密码局公告2024年第51号",
+        "publisher": "中华人民共和国商务部 (Ministry of Commerce, PRC)",
+        "language": "zh",
+        "datePublished": "2024-11-15",
+        "dateAccessed": "2026-11-27",
+        "sourceType": "official",
+        "confidence": "primary"
+      }
+    },
+    {
+      "op": "add_source",
+      "row": {
+        "id": "src-mofcom-2024-51-annex-1",
+        "url": "https://www.mofcom.gov.cn/cms_files/filemanager/600926013/attach/202411/4c2b07bcf8664fb4b04c8b69bb0fd26f.pdf",
+        "title": "中华人民共和国两用物项出口管制清单",
+        "publisher": "中华人民共和国商务部 (Ministry of Commerce, PRC)",
+        "language": "zh",
+        "datePublished": "2024-11-15",
+        "dateAccessed": "2026-11-27",
+        "sourceType": "official",
+        "confidence": "primary"
+      }
+    },
+    {
+      "op": "add_source",
+      "row": {
+        "id": "src-mofcom-2024-51-annex-2",
+        "url": "https://www.mofcom.gov.cn/cms_files/filemanager/600926013/attach/202411/dc05a2e6db2749f7b9d3c0ad9a6f6254.pdf",
+        "title": "自2024年12月1日起废止的公告",
+        "publisher": "中华人民共和国商务部 (Ministry of Commerce, PRC)",
+        "language": "zh",
+        "datePublished": "2024-11-15",
+        "dateAccessed": "2026-11-27",
+        "sourceType": "official",
+        "confidence": "primary"
+      }
+    },
+    {
+      "op": "add_event",
+      "row": {
+        "id": "evt-cn-dual-use-list-2024",
+        "date": "2024-11-15",
+        "jurisdiction": "china",
+        "issuingBody": "MOFCOM, MIIT, GACC and the State Cryptography Administration",
+        "documentNumber": "Announcement No. 51 (2024)",
+        "documentLabel": "Publication of the unified dual-use export control list",
+        "titleOriginal": "关于发布《中华人民共和国两用物项出口管制清单》的公告",
+        "titleOriginalLang": "zh",
+        "titleEnSource": "self",
+        "policyStatus": "active",
+        "mechanism": [
+          "export_control"
+        ],
+        "affectedMaterialIds": [
+          "graphite"
+        ],
+        "verificationStatus": "provisional",
+        "supersededByEventId": null,
+        "sourceIds": [
+          "src-mofcom-2024-51",
+          "src-mofcom-2024-51-annex-1",
+          "src-mofcom-2024-51-annex-2"
+        ]
+      }
+    },
+    {
+      "op": "add_measure",
+      "row": {
+        "id": "ctl-cn-list-2024-graphite-licensing",
+        "eventId": "evt-cn-dual-use-list-2024",
+        "measureType": "export_licensing",
+        "direction": "export",
+        "clause": "1C108.b and 1C108.c",
+        "targetScopes": [
+          "all_jurisdictions"
+        ],
+        "targetJurisdictions": [],
+        "targetEntities": [],
+        "targetEndUsersAsStated": [],
+        "targetEndUsesAsStated": [],
+        "materialIds": [
+          "graphite"
+        ],
+        "materialAttribution": "tracked_only",
+        "untrackedMaterialsAsStated": [],
+        "productScopeAsStated": "Artificial graphite meeting all three criteria in 1C108.b and natural flake graphite and its products in 1C108.c.",
+        "productCodes": [
+          {
+            "system": "cn_control_number",
+            "code": "1C108.b",
+            "role": "legal_scope"
+          },
+          {
+            "system": "cn_control_number",
+            "code": "1C108.c",
+            "role": "legal_scope"
+          }
+        ],
+        "controlledItemTypes": [
+          "goods"
+        ],
+        "controlledStages": [],
+        "legalBasisEventIds": [
+          "evt-cn-ecl-2020"
+        ],
+        "legalBasisAsStated": null,
+        "modifiesMeasureIds": [
+          "ctl-cn-graphite-2023-export-licensing"
+        ],
+        "modifiesExternalInstruments": [],
+        "evidence": [
+          {
+            "sourceId": "src-mofcom-2024-51-annex-1",
+            "supports": [
+              "measure_type",
+              "direction",
+              "clause",
+              "targets",
+              "materials",
+              "product_scope",
+              "product_codes",
+              "status"
+            ],
+            "evidence": "explicit",
+            "locator": "Annex 1, entries 1C108.b and 1C108.c",
+            "note": null
+          },
+          {
+            "sourceId": "src-mofcom-2024-51-annex-2",
+            "supports": [
+              "modified_measures"
+            ],
+            "evidence": "explicit",
+            "locator": "Annex 2, item VIII",
+            "note": null
+          }
+        ],
+        "notes": null,
+        "issuer": "china"
+      }
+    },
+    {
+      "op": "add_status",
+      "measureId": "ctl-cn-list-2024-graphite-licensing",
+      "entry": {
+        "status": "in_force",
+        "date": "2024-12-01",
+        "until": null,
+        "sourceId": "src-mofcom-2024-51-annex-1",
+        "note": null
+      },
+      "evidence": {
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Annex 1, entries 1C108.b and 1C108.c",
+        "note": null
+      }
+    },
+    {
+      "op": "add_status",
+      "measureId": "ctl-cn-graphite-2023-export-licensing",
+      "entry": {
+        "status": "revoked",
+        "date": "2024-12-01",
+        "until": null,
+        "sourceId": "src-mofcom-2024-51-annex-2",
+        "note": null
+      },
+      "evidence": {
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Annex 2, item VIII",
+        "note": null
+      }
+    },
+    {
+      "op": "add_status",
+      "measureId": "ctl-cn-graphite-2023-decontrol",
+      "entry": {
+        "status": "revoked",
+        "date": "2024-12-01",
+        "until": null,
+        "sourceId": "src-mofcom-2024-51-annex-2",
+        "note": null
+      },
+      "evidence": {
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Annex 2, item VIII",
+        "note": null
+      }
+    }
+  ],
+  "instrumentDates": [
+    {
+      "eventId": "evt-cn-us-ban-2024",
+      "sourceId": "src-mofcom-46",
+      "signedOn": "2024-12-03",
+      "publishedOn": "2024-12-03",
+      "operativeFrom": "2024-12-03",
+      "operativeThrough": null
+    },
+    {
+      "eventId": "evt-cn-mofcom-72-2025",
+      "sourceId": "src-mofcom-72",
+      "signedOn": "2025-11-09",
+      "publishedOn": "2025-11-09",
+      "operativeFrom": "2025-11-09",
+      "operativeThrough": "2026-11-27"
+    },
+    {
+      "eventId": "evt-cn-mofcom-59-2026",
+      "sourceId": "src-mofcom-2026-59",
+      "signedOn": "2026-11-23",
+      "publishedOn": "2026-11-24",
+      "operativeFrom": "2026-11-28",
+      "operativeThrough": "2027-01-27"
+    },
+    {
+      "eventId": "china-rare-earth-suspension-2025-11",
+      "sourceId": "src-mofcom-70",
+      "signedOn": "2025-11-07",
+      "publishedOn": "2025-11-07",
+      "operativeFrom": "2025-11-07",
+      "operativeThrough": "2026-11-10"
+    },
+    {
+      "eventId": "china-rare-earth-suspension-extension-2026-11",
+      "sourceId": "src-mofcom-2026-58",
+      "signedOn": "2026-11-09",
+      "publishedOn": "2026-11-09",
+      "operativeFrom": "2026-11-11",
+      "operativeThrough": "2027-01-10"
+    },
+    {
+      "eventId": "evt-cn-dual-use-list-2024",
+      "sourceId": "src-mofcom-2024-51",
+      "signedOn": null,
+      "publishedOn": "2024-11-15",
+      "operativeFrom": "2024-12-01",
+      "operativeThrough": null
+    }
+  ],
+  "sourceToClaim": [
+    {
+      "claim": "Announcement No. 59 of 2026 suspends the second paragraph of Announcement No. 46 of 2024 from 28 November 2026 through 27 January 2027.",
+      "sourceId": "src-mofcom-2026-59",
+      "locator": "Operative sentence",
+      "original": "经批准，自2026年11月28日起至2027年1月27日，商务部公告2024年第46号（《关于加强相关两用物项对美国出口管制的公告》）第二款暂停实施。",
+      "recordedAs": "status suspended, date 2026-11-28, until 2027-01-27 on the two clauses coded from the second paragraph"
+    },
+    {
+      "claim": "Announcement No. 59 of 2026 is signed 23 November 2026 and carries an issue date of 24 November 2026.",
+      "sourceId": "src-mofcom-2026-59",
+      "locator": "Signature block; page header 发文日期",
+      "original": "商务部 2026年11月23日；【发文日期】2026年11月24日",
+      "recordedAs": "signedOn 2026-11-23; publishedOn and source datePublished 2026-11-24"
+    },
+    {
+      "claim": "Announcement No. 72 of 2025 suspended the same paragraph from its issue through 27 November 2026.",
+      "sourceId": "src-mofcom-72",
+      "locator": "Operative sentence",
+      "original": "经批准，自即日起至2026年11月27日，商务部公告2024年第46号（《关于加强相关两用物项对美国出口管制的公告》）第二款暂停实施。",
+      "recordedAs": "published entry: suspended, date 2025-11-09, until 2026-11-27 (unchanged)"
+    },
+    {
+      "claim": "Neither notice names the first paragraph of Announcement No. 46 of 2024 or its closing re-transfer sentence.",
+      "sourceId": "src-mofcom-2026-59",
+      "locator": "Whole notice",
+      "original": "第二款暂停实施",
+      "recordedAs": "no entry added to ctl-cn-us-2024-military-end-use-ban; its in_force entry of 2024-12-03 stands"
+    },
+    {
+      "claim": "Announcement No. 58 of 2026 is a separate instrument: it continues the suspension of six October 2025 announcements from 11 November 2026 through 10 January 2027.",
+      "sourceId": "src-mofcom-2026-58",
+      "locator": "Operative sentence",
+      "original": "经批准，自2026年11月11日起至2027年1月10日，商务部、海关总署公告2025年第55号、56号、57号、58号，及商务部公告2025年第61号、62号继续暂停实施。",
+      "recordedAs": "published entries unchanged; this overlay adds none for those clauses"
+    },
+    {
+      "claim": "No. 51 repeals No. 39 with effect from December 1, 2024.",
+      "sourceId": "src-mofcom-2024-51-annex-2",
+      "locator": "Annex 2, item VIII",
+      "recordedAs": "Revoked under the former instrument for both No. 39 rows. The prior decontrol is historical and the repeal does not reimpose the earlier controls."
+    },
+    {
+      "claim": "The two graphite families in No. 39 Item 1 appear in the unified list under 1C108.b and 1C108.c.",
+      "sourceId": "src-mofcom-2024-51-annex-1",
+      "locator": "Annex 1, entries 1C108.b and 1C108.c",
+      "recordedAs": "One grouped licensing clause, linked to its predecessor. The list includes other graphite items outside this crosswalk."
+    }
+  ],
+  "outsideScope": [
+    "Whether the suspended paragraph resumes on 28 January 2027: no notice states it, and this overlay records nothing after 27 January 2027.",
+    "Whether \"第二款\" covers anything beyond the numbered second item of Announcement No. 46 of 2024. The published record codes that item as two clauses; this overlay follows it and does not reopen the reading.",
+    "The portal page stamp on some mirrors of each notice, which can fall a day after the issue date printed in the page header. The record uses the issue date (发文日期); a reviewer should confirm that basis.",
+    "Other 2026 MOFCOM notices listed on the same pages on 26 November 2026 (for example Nos. 1, 26, 29, 34, 48 to 53 and the entity-list notices): none modifies Announcement No. 46 of 2024 or the six October 2025 announcements, and none is coded here.",
+    "The undated first entries the published record keeps for the clauses of Announcement No. 61 of 2025. They are unchanged.",
+    "The remainder of Announcement No. 51, including other list items and other instruments in Annex 2, requires a separate historical crosswalk. The selective graphite tag on the candidate event describes the coverage of this pilot."
+  ]
+}

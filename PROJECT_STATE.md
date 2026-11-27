@@ -1,3 +1,9 @@
+## 2026-11-27 — Controls feed candidate for review
+
+- The [integration guide](docs/engineering/controls-feed/README.md) provides a pinned rebuild of the November 12 research ZIP, two comparable feed releases and a Python/SQLite importer. The candidate covers 33 clauses under 13 pilot instruments and carries 21 further clauses from the public record.
+- The [source review](docs/analysis/mofcom-59-continuation-source-adjudication-2026-11-26.md) traces No. 59 of 2026 to paragraph 2 of No. 46 and reconstructs the worldwide graphite licensing basis under No. 51 of 2024. Human adjudication of those readings and distribution approval are pending. The legal-status cutoff remains November 12.
+- The [operator runbook](docs/engineering/controls-feed/RUNBOOK.md) covers manual source checks, corrections and reproduction of a prior answer.
+
 ## 2026-11-24 — Stratellar production launch
 
 - [Stratellar](https://stratellar.com) is live with the Marker Bed mark, the descriptor “Strategic Materials Intelligence”, and the tagline “Materials. Policy. Capital.” [Release PR #292](https://github.com/VSSpowerlifting/stratellar/pull/292) and the [cutover record](docs/brand/STRATELLAR_CUTOVER.md) document the release.
