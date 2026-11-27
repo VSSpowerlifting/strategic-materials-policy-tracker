@@ -619,6 +619,48 @@
     }
   },
   {
+    "id": "evt-cn-mofcom-72-2025",
+    "date": "2025-11-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM",
+    "titleOriginal": "商务部公告2025年第72号 公布调整实施商务部公告2024年第46号的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM Announcement No. 72 of 2025: suspension of paragraph 2 of Announcement No. 46 of 2024 through 27 November 2026",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM Announcement No. 72 (2025)",
+    "policyStatus": "active",
+    "mechanism": [
+      "export_control",
+      "trade_action"
+    ],
+    "affectedMaterialIds": [
+      "gallium",
+      "germanium",
+      "antimony",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "On 9 November 2025, MOFCOM suspended the second paragraph (第二款) of Announcement No. 46 of 2024, effective immediately through 27 November 2026. That paragraph had imposed a presumption of denying export licences for gallium, germanium, antimony and superhard-material dual-use items destined for the United States and stricter end-user and end-use review for graphite dual-use exports to the United States. The separate first-paragraph prohibition on dual-use exports to US military end users or military end uses was not suspended. The suspension is time-limited, not a repeal.",
+    "analyticalSignificance": "Records the US-destination-specific suspension separately from the November 2025 suspension of the October 2025 export-control package (Announcement No. 70), which has a different scope and timeline. No. 72 states only that paragraph 2 is suspended through 27 November 2026; it neither changes paragraph 1 nor announces a subsequent extension. The affected clause-level status histories remain attached to the original No. 46 controls, rather than being recoded as new restrictions.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-72",
+      "src-mofcom-46"
+    ],
+    "verificationStatus": "verified",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-11-09",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
+  },
+  {
     "id": "evt-cn-tungsten-2025",
     "date": "2025-02-04",
     "jurisdiction": "china",
