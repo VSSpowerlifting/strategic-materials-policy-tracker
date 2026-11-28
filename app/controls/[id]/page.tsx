@@ -23,6 +23,7 @@ import {
   summarizeControl,
 } from "@/lib/capital-control";
 import { site } from "@/lib/site";
+import { controlBriefCases, controlBriefHref } from "@/lib/control-brief-cases";
 import {
   getAllControlMeasures,
   getControlMeasureById,
@@ -67,6 +68,7 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
   if (!m) notFound();
   const event = getEventById(m.eventId)!;
   const materials = getMaterialsByIds(m.materialIds);
+  const brief = controlBriefCases.find((item) => item.instrumentId === m.eventId);
   // The status in effect on the legal-status date, never a later-dated entry: that one is "scheduled".
   const asOf = site.legalStatusAsOf;
   const current = controlEntryOn(m, asOf) ?? m.statusHistory[0];
@@ -209,6 +211,11 @@ export default async function ControlPage({ params }: { params: Promise<{ id: st
           </Section>
 
           <Section title="Status" description={`Listed oldest first. The entry in effect on ${formatDate(asOf)} is marked current; a later-dated entry is marked scheduled. End dates follow the governing source.`}>
+            {brief ? (
+              <p className="mb-4 text-sm">
+                <Link href={controlBriefHref(brief)} className="link-quiet">Compare dates in the change brief</Link>
+              </p>
+            ) : null}
             <div className="border-y border-border-strong py-4">
               <ControlStatusTrail entries={m.statusHistory} asOf={asOf} />
               {statusEntriesRecordedElsewhere(m).map(({ entry, event }) => (

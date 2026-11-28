@@ -1,3 +1,9 @@
+## 2026-11-27 — Controls change briefs for buyer evaluation
+
+- [Review and buyer evaluation notes](docs/product/controls-change-briefs.md) cover two worked comparisons, the dated text attachment, and the contact copy for founder review.
+- Both cases pin the issued November 12 archive and reuse baseline replay. No. 55 keeps the same standing across the November 2026 extension. No. 61 shows the distinction between operative, scheduled and unresolved starts before suspension.
+- Local production verification covers desktop, mobile, keyboard use, attachment generation and the candidate publication boundary. Buyer evaluation and editorial approval are pending.
+
 ## 2026-11-27 — Targeted Controls release preparation
 
 - Founder approved the AI-assisted editorial recommendations for the targeted No. 59/graphite update. [Release decision and remaining gates](docs/analysis/controls-targeted-release-decision-2026-11-27.md). Formal named-human source review is not yet recorded; no public seed promotion or new issued feed has occurred.

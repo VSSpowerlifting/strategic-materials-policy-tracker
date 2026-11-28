@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { site, nav, secondaryNav } from "@/lib/site";
+import { controlBriefCases, controlBriefHref } from "@/lib/control-brief-cases";
 import {
   getAllControlMeasures,
   getAllEvents,
@@ -42,6 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getAllMaterials().map((m) => entry(`/materials/${m.slug}`, 0.7)),
     ...getAllJurisdictions().map((j) => entry(`/actors/${j.code.toLowerCase()}`, 0.7)),
     ...getAllFinancialCommitments().map((c) => entry(`/capital/${c.id}`, 0.7)),
+    ...controlBriefCases.map((item) => ({ ...entry(controlBriefHref(item), 0.7), lastModified: undefined })),
     ...getAllControlMeasures().map((m) => entry(`/controls/${m.id}`, 0.7)),
     ...getAllOrganizations().map((o) => entry(`/organizations/${o.id}`, 0.6)),
     entry("/projects/compare", 0.7),
