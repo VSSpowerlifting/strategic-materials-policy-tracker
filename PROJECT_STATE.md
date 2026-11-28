@@ -1,3 +1,8 @@
+## 2026-11-27 — Targeted Controls release preparation
+
+- Founder approved the AI-assisted editorial recommendations for the targeted No. 59/graphite update. [Release decision and remaining gates](docs/analysis/controls-targeted-release-decision-2026-11-27.md). Formal named-human source review is not yet recorded; no public seed promotion or new issued feed has occurred.
+- The historical Controls download and default CLI are pinned to the original November 12 archive, including companion-file and ZIP digests. The explicit `--live` CLI option is staging-only. Retain the global cutoff and reconcile #283 with #294 before promotion.
+
 ## 2026-11-27 — Controls feed candidate for review
 
 - The [integration guide](docs/engineering/controls-feed/README.md) provides a pinned rebuild of the November 12 research ZIP, two comparable feed releases and a Python/SQLite importer. The candidate covers 33 clauses under 13 pilot instruments and carries 21 further clauses from the public record.
