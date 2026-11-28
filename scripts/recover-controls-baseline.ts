@@ -3,7 +3,7 @@
  *
  *   npm run feed:controls:verify-baseline
  *       Check data/releases/controls/<asOf>/ against the pinned identity and,
- *       while the live record still has that cutoff, against a fresh build.
+ *       against the published download; report the separate live staging identity.
  *
  *   npm run feed:controls:verify-baseline -- --from-git
  *       Also rebuild the snapshot from the pinned commit in a temporary
@@ -27,6 +27,7 @@ import {
   type ControlsSnapshot,
 } from "../lib/controls-release-archive";
 import { buildControlsSnapshotBundle } from "../lib/controls-snapshot";
+import { buildPublishedControlsSnapshotBundle } from "../lib/published-controls-download";
 
 const ARCHIVE_FILES = [...CONTROLS_DATASET_FILES, "manifest.json"] as const;
 /** Everything `scripts/build-controls-snapshot.ts` reads at the pinned commit. */
@@ -35,27 +36,17 @@ const REBUILD_PATHS = [ZIP_ROUTE, "lib", "data/seed", "scripts/build-controls-sn
 
 type Check = { check: string; result: "match" | "skipped"; detail: string };
 
-function compareLive(snapshot: ControlsSnapshot): Check {
-  const live = buildControlsSnapshotBundle();
-  if (live.manifest.asOf !== snapshot.manifest.asOf) {
-    return {
-      check: "live record",
-      result: "skipped",
-      detail: `the live record's cutoff is ${live.manifest.asOf}; the archive of ${snapshot.manifest.asOf} is checked against its pin and, with --from-git, its commit`,
-    };
+function comparePublished(snapshot: ControlsSnapshot): Check {
+  const issued = buildPublishedControlsSnapshotBundle();
+  if (issued.manifest.asOf !== snapshot.manifest.asOf) {
+    return { check: "published download", result: "skipped", detail: `download points to ${issued.manifest.asOf}` };
   }
-  const byName = new Map(live.files.map((file) => [file.name, file.content]));
+  const byName = new Map(issued.files.map(file => [file.name, file.content]));
   for (const name of CONTROLS_DATASET_FILES) {
-    if (byName.get(name) !== snapshot.contents[name]) {
-      throw new ControlsIntegrityError(
-        `${name}: the live record no longer rebuilds the archived ${snapshot.manifest.asOf} release while still stating that cutoff. A change to the record needs a new cutoff and a new archive, not an edit under the old identity.`,
-      );
-    }
+    if (byName.get(name) !== snapshot.contents[name]) throw new ControlsIntegrityError(`${name}: published download differs from pinned archive`);
   }
-  if (live.manifest.datasetVersion !== snapshot.manifest.datasetVersion) {
-    throw new ControlsIntegrityError(`live datasetVersion ${live.manifest.datasetVersion} differs from the archive`);
-  }
-  return { check: "live record", result: "match", detail: live.manifest.datasetVersion };
+  if (issued.manifest.datasetVersion !== snapshot.manifest.datasetVersion) throw new ControlsIntegrityError("published download identity differs from its archive");
+  return { check: "published download", result: "match", detail: issued.manifest.datasetVersion };
 }
 
 function rebuildFromGit(commit: string, asOf: string) {
@@ -119,7 +110,7 @@ function main(argv: string[]): void {
       archiveError = error instanceof Error ? error.message : String(error);
     }
 
-    if (archive) checks.push(compareLive(archive));
+    if (archive) checks.push(comparePublished(archive));
 
     if (fromGit) {
       const { files: rebuilt, zip } = rebuildFromGit(pinned.sourceCommit, pinned.asOf);
@@ -160,6 +151,7 @@ function main(argv: string[]): void {
       datasetVersion: pinned.datasetVersion,
       sourceCommit: pinned.sourceCommit,
       archiveProblem: archiveError,
+      liveStagingDatasetVersion: buildControlsSnapshotBundle().manifest.datasetVersion,
       fileSha256: kept
         ? Object.fromEntries(CONTROLS_DATASET_FILES.map((name) => [name, sha256Hex(kept.contents[name])]))
         : null,

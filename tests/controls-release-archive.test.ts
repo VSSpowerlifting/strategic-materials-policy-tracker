@@ -45,7 +45,7 @@ const NPM = process.platform === "win32" ? "npm.cmd" : "npm";
 const archiveDir = controlsArchiveDir(AS_OF);
 const live = buildControlsSnapshotBundle();
 /** The live record moves on when a new cutoff is published; the archive does not. */
-const liveAtArchivedCutoff = live.manifest.asOf === AS_OF;
+
 const commitPresent =
   spawnSync("git", ["cat-file", "-e", `${SOURCE_COMMIT}^{commit}`], { cwd: process.cwd(), stdio: "ignore" }).status === 0;
 
@@ -133,17 +133,10 @@ test("readControlsArchive refuses a date no release is pinned for, and a root wi
   assert.match(refusal(() => readControlsArchive(AS_OF, empty)).message, /archive directory is missing: /);
 });
 
-test("while the live record states cutoff 2026-11-12, a fresh build equals the archive byte for byte and has the same datasetVersion (once the cutoff moves, only the forward move is asserted)", (t) => {
-  if (!liveAtArchivedCutoff) {
-    assert.ok(live.manifest.asOf.localeCompare(AS_OF) > 0, `the live cutoff ${live.manifest.asOf} moved backwards from ${AS_OF}`);
-    t.diagnostic(`live cutoff is ${live.manifest.asOf}; the 2026-11-12 archive is no longer compared with a live build`);
-    return;
-  }
-  assert.equal(live.manifest.datasetVersion, DATASET_VERSION);
-  const built = new Map(live.files.map((file) => [file.name, file.content]));
-  for (const name of ARCHIVE_FILES) {
-    assert.equal(built.get(name), readFileSync(join(archiveDir, name), "utf8"), `${name} differs between the live build and the archive`);
-  }
+test("the targeted live revision has its own identity while the issued archive stays pinned", () => {
+  assert.equal(live.manifest.asOf, AS_OF);
+  assert.notEqual(live.manifest.datasetVersion, DATASET_VERSION);
+  assert.equal(buildPublishedControlsSnapshotBundle().manifest.datasetVersion, DATASET_VERSION);
 });
 
 test("README.md and worked_example.py in the bundle are the files on disk and equal the pinned commit ecffb92 (in a shallow clone without that commit the comparison with git is skipped; the comparison with disk still runs)", (t) => {
@@ -151,7 +144,7 @@ test("README.md and worked_example.py in the bundle are the files on disk and eq
   for (const name of ["README.md", "worked_example.py"]) {
     const onDisk = readFileSync(join(process.cwd(), COMPANION_DIR, name), "utf8");
     assert.equal(built.get(name), onDisk, `${name} in the bundle is not the file on disk`);
-    if (!commitPresent || !liveAtArchivedCutoff) continue;
+    if (!commitPresent) continue;
     const atCommit = execFileSync("git", ["show", `${SOURCE_COMMIT}:${COMPANION_DIR}/${name}`], {
       cwd: process.cwd(),
       encoding: "utf8",
@@ -291,14 +284,10 @@ test("npm run feed:controls:verify-baseline reports verified true with the archi
   assert.equal(release.archiveProblem, null);
   assert.deepEqual(release.fileSha256, Object.fromEntries(CONTROLS_DATASET_FILES.map((name) => [name, PINNED_FILES[name].sha256])));
   const checks = release.checks as { check: string; result: string; detail: string }[];
-  assert.deepEqual(checks.map((check) => check.check), ["archive against pinned identity", "live record"]);
+  assert.deepEqual(checks.map((check) => check.check), ["archive against pinned identity", "published download"]);
   assert.deepEqual(checks[0], { check: "archive against pinned identity", result: "match", detail: DATASET_VERSION });
-  if (liveAtArchivedCutoff) {
-    assert.deepEqual(checks[1], { check: "live record", result: "match", detail: DATASET_VERSION });
-  } else {
-    assert.equal(checks[1].result, "skipped");
-    assert.match(checks[1].detail, new RegExp(`the live record's cutoff is ${live.manifest.asOf}`));
-  }
+  assert.deepEqual(checks[1], { check: "published download", result: "match", detail: DATASET_VERSION });
+  assert.equal(release.liveStagingDatasetVersion, live.manifest.datasetVersion);
 });
 
 test("verify-baseline --from-git --write <new dir>: with commit ecffb92 present it reports the rebuild as a match and writes files equal to the archive, then refuses to write there again; in a shallow clone without the commit it exits 1 saying so and writes nothing", (t) => {
@@ -319,7 +308,7 @@ test("verify-baseline --from-git --write <new dir>: with commit ecffb92 present 
     checks.map((check) => [check.check, check.result]),
     [
       ["archive against pinned identity", "match"],
-      ["live record", liveAtArchivedCutoff ? "match" : "skipped"],
+      ["published download", "match"],
       ["rebuild from pinned commit", "match"],
       ["recovered files written", "match"],
     ],

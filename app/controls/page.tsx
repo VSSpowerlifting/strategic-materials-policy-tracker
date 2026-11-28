@@ -52,7 +52,7 @@ export default function ControlsPage() {
         <span className="font-semibold text-foreground">{statusNow.get("suspended") ?? 0}</span> suspended ·{" "}
         <span className="font-semibold text-foreground">{clocks.length}</span> with a stated end date
       </p>
-      <p className="mt-1 max-w-3xl font-display text-xs leading-5 text-faint">Statuses as of {formatDate(asOf)}, the date through which published legal instruments are incorporated. An entry dated later is shown as scheduled, not as effective.</p>
+      <p className="mt-1 max-w-3xl font-display text-xs leading-5 text-faint">Global status reference date: {formatDate(asOf)}. An entry dated later is shown as scheduled, not as effective. Targeted record revision: {formatDate(site.controlsTargetedRevision.date)} ({site.controlsTargetedRevision.scope}); this does not advance the global status reference date.</p>
 
       <PageContents
         className="mt-8"

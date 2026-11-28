@@ -38,6 +38,8 @@ export const site = {
    * This date is not a claim that every legal instrument was freshly rechecked.
    */
   legalStatusAsOf: "2026-11-12",
+  /** Limited record revision; not a new global legal-status cutoff. */
+  controlsTargetedRevision: { date: "2026-11-27", scope: "China: No. 72/59 paragraph-2 suspension and 1C108.b–c graphite crosswalk" },
   /**
    * Date of the last curated site research/legal revision, distinct from source
    * access dates and individual record-review timestamps.

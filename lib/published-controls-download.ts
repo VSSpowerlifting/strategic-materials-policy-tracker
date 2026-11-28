@@ -15,6 +15,7 @@ import {
 } from "./controls-release-archive";
 
 export const PUBLIC_CONTROLS_DOWNLOAD_AS_OF = "2026-11-12";
+export const PUBLIC_CONTROLS_DOWNLOAD_CLAUSES = 53;
 const COMPANION_HASHES = {
   "README.md": "d4cb7952ea71eba90c1914da746b55a6607db3283b39e519ae71c6d8c5c39d73",
   "worked_example.py": "cfbd323adf8e5723209b89b14f15242facd861d1d12dc06d8f6751bfae5e37e5",

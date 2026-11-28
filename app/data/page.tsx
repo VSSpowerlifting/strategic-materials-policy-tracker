@@ -3,6 +3,7 @@ import { Container, PageHeading } from "@/components/ui/container";
 import { getDatasetSummary } from "@/lib/data";
 import { formatDate } from "@/lib/format";
 import { site } from "@/lib/site";
+import { PUBLIC_CONTROLS_DOWNLOAD_AS_OF, PUBLIC_CONTROLS_DOWNLOAD_CLAUSES } from "@/lib/published-controls-download";
 
 export const metadata: Metadata = {
   title: "Data export",
@@ -122,11 +123,11 @@ export default function DataPage() {
         <div>
           <h2 id="controls-snapshot-heading" className="font-display text-base font-semibold text-foreground">Export controls snapshot</h2>
           <p className="mt-2 max-w-prose text-sm leading-6 text-muted">
-            Download {s.controlMeasures} export-control clauses with linked policy events, dated status histories, and sources.
+            Download the issued historical snapshot of {PUBLIC_CONTROLS_DOWNLOAD_CLAUSES} export-control clauses with linked policy events, dated status histories, and sources.
             The ZIP includes a versioned manifest with checksums, a data dictionary, and a worked import example.
           </p>
           <p className="mt-2 text-sm text-muted">
-            Status as of <time dateTime={site.legalStatusAsOf}>{formatDate(site.legalStatusAsOf)}</time> · Selective coverage
+            Snapshot status as of <time dateTime={PUBLIC_CONTROLS_DOWNLOAD_AS_OF}>{formatDate(PUBLIC_CONTROLS_DOWNLOAD_AS_OF)}</time> · Immutable historical release · Selective coverage
           </p>
         </div>
         <a
@@ -137,6 +138,8 @@ export default function DataPage() {
           Download snapshot (ZIP)
         </a>
       </section>
+
+      <p className="mt-4 max-w-prose text-sm text-muted">Live record: targeted revision {formatDate(site.controlsTargetedRevision.date)} ({site.controlsTargetedRevision.scope}). The global legal-status cutoff remains {formatDate(site.legalStatusAsOf)}. The historical ZIP does not include this revision.</p>
 
       <ul className="mt-8 border-y border-border-strong">
         {downloads.map((d) => (

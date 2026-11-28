@@ -1,3 +1,9 @@
+## 2026-11-27 — Targeted Controls promotion candidate (draft)
+
+- Stages three instrument events, four sources, five status additions and one graphite successor; reuses #283's No. 72 ID. New events remain provisional pending formal human source review; original pending overlay unchanged.
+- Distinguishes targeted revision from global November 12 reference date and issued historical ZIP; the verifier checks the issued archive and reports live staging identity separately.
+- Do not merge or distribute before formal review, CI, preview and rights-profile verification. Close #283 only after verified replacement merge.
+
 ## 2026-11-27 — Targeted Controls release preparation
 
 - Founder approved the AI-assisted editorial recommendations for the targeted No. 59/graphite update. [Release decision and remaining gates](docs/analysis/controls-targeted-release-decision-2026-11-27.md). Formal named-human source review is not yet recorded; no public seed promotion or new issued feed has occurred.
