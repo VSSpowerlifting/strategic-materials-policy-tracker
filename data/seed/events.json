@@ -544,7 +544,7 @@
     "titleEn": "MOFCOM/GACC Announcement No. 39 of 2023 on graphite export control measures",
     "titleEnSource": "self",
     "documentNumber": "MOFCOM/GACC Announcement No. 39 (2023)",
-    "policyStatus": "active",
+    "policyStatus": "superseded",
     "mechanism": [
       "export_control",
       "dual_use_license"
@@ -558,12 +558,14 @@
       "defense",
       "industrial"
     ],
-    "summary": "Effective 1 December 2023, three high-sensitivity synthetic and natural-flake graphite categories moved onto the dual-use control list; five low-sensitivity items were de-controlled. Replaced the 2006 temporary graphite regime.",
+    "summary": "Effective 1 December 2023, three high-sensitivity synthetic and natural-flake graphite categories moved onto the dual-use control list; five low-sensitivity items were de-controlled. Replaced the 2006 temporary graphite regime. Announcement No. 51 of 2024 repealed this instrument effective 1 December 2024; the specified licensing families continue under entries 1C108.b and 1C108.c.",
     "analyticalSignificance": "Targeted EV-battery anode supply; stated justification cited national security and non-proliferation obligations. Original-language text and a quoted framing anchor are not yet coded for this record.",
-    "supersededByEventId": null,
+    "supersededByEventId": "evt-cn-dual-use-list-2024",
     "sourceIds": [
       "src-mofcom-39",
-      "src-iea-graphite-2023"
+      "src-iea-graphite-2023",
+      "src-mofcom-2024-51-annex-2",
+      "src-mofcom-2024-51-annex-1"
     ],
     "verificationStatus": "verified",
     "intakeMode": "backfill",
@@ -601,13 +603,14 @@
       "semiconductor",
       "industrial"
     ],
-    "summary": "Issued one day after a US BIS action adding ~140 entities and tightening chip controls, this barred, in principle, exports to the US of gallium, germanium, antimony, and superhard materials, prohibited all dual-use exports to US military end users/uses, and tightened graphite end-use review. The materials ban (Article 2) was suspended by MOFCOM Announcement No. 72 of 2025, effective to 27 November 2026; the Article 1 military-end-use prohibition was not addressed.",
+    "summary": "Issued one day after a US BIS action adding ~140 entities and tightening chip controls, this barred, in principle, exports to the US of gallium, germanium, antimony, and superhard materials, prohibited all dual-use exports to US military end users/uses, and tightened graphite end-use review. The materials ban (Article 2) was suspended by MOFCOM Announcement No. 72 of 2025, effective to 27 November 2026; the Article 1 military-end-use prohibition was not addressed. Announcement No. 59 of 2026 continues the paragraph 2 suspension from 28 November 2026 through 27 January 2027 inclusive.",
     "analyticalSignificance": "The clearest country-specific escalation of the cycle: the first Chinese measure to name the United States as the destination and to close military end-uses outright. It is not a blanket export ban — clause 1 prohibits dual-use exports to US military users and uses, clause 2 denies licences in principle for gallium, germanium, antimony and superhard materials and tightens end-use review for graphite. The retaliation reading rests on the one-day-after-BIS timing and lives here, not in the quoted anchor, which states the national-security and non-proliferation justification.",
     "supersededByEventId": null,
     "sourceIds": [
       "src-mofcom-46",
       "src-mofcom-72",
-      "src-cset-mofcom-46"
+      "src-cset-mofcom-46",
+      "src-mofcom-2026-59"
     ],
     "verificationStatus": "verified",
     "intakeMode": "backfill",
@@ -3240,6 +3243,129 @@
       "officialPublicationDate": "2025-10-09",
       "discoveredAt": null,
       "verifiedAt": "2026-11-11",
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-72-2025",
+    "date": "2025-11-09",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM",
+    "titleOriginal": "商务部公告2025年第72号 公布调整实施商务部公告2024年第46号的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM Announcement No. 72 of 2025: decision adjusting the implementation of MOFCOM Announcement No. 46 of 2024 (second paragraph suspended to 27 November 2026)",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM Announcement No. 72 (2025)",
+    "policyStatus": "active",
+    "mechanism": [
+      "export_control",
+      "trade_action"
+    ],
+    "affectedMaterialIds": [
+      "gallium",
+      "germanium",
+      "antimony",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "On 9 November 2025, MOFCOM suspended paragraph 2 of Announcement No. 46 of 2024 through 27 November 2026 inclusive. The provision covers presumptive licence denial for gallium, germanium, antimony and superhard-material dual-use exports to the United States and enhanced graphite end-use and end-user review. Paragraph 1 is unaffected.",
+    "analyticalSignificance": "Separate from the six-instrument suspension. No. 59 of 2026 continues the same paragraph's suspension from 28 November through 27 January 2027. Neither introduces a new restriction.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-72",
+      "src-mofcom-46"
+    ],
+    "verificationStatus": "provisional",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2025-11-09",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-mofcom-59-2026",
+    "date": "2026-11-24",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM",
+    "titleOriginal": "商务部公告2026年第59号 公布继续调整实施商务部公告2024年第46号的决定",
+    "titleOriginalLang": "zh",
+    "titleEn": "MOFCOM Announcement No. 59 of 2026: decision continuing to adjust the implementation of MOFCOM Announcement No. 46 of 2024 (second paragraph suspended 28 November 2026 to 27 January 2027)",
+    "titleEnSource": "self",
+    "documentNumber": "MOFCOM Announcement No. 59 (2026)",
+    "policyStatus": "active",
+    "mechanism": [
+      "export_control",
+      "trade_action"
+    ],
+    "affectedMaterialIds": [
+      "gallium",
+      "germanium",
+      "antimony",
+      "graphite"
+    ],
+    "affectedSectors": [
+      "defense",
+      "semiconductor",
+      "industrial"
+    ],
+    "summary": "Signed 23 November and issued 24 November 2026, the announcement continues the suspension of paragraph 2 of Announcement No. 46 of 2024 from 28 November 2026 through 27 January 2027 inclusive.",
+    "analyticalSignificance": "Continuation of two previously coded material-specific clauses, not a new underlying restriction. No. 72 ends on 27 November; paragraph 1's military restriction is not addressed. Standing after 27 January is unresolved.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-2026-59",
+      "src-mofcom-72",
+      "src-mofcom-46"
+    ],
+    "verificationStatus": "provisional",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2026-11-24",
+      "discoveredAt": null,
+      "verifiedAt": null,
+      "publishedAt": null
+    }
+  },
+  {
+    "id": "evt-cn-dual-use-list-2024",
+    "date": "2024-11-15",
+    "jurisdiction": "china",
+    "issuingBody": "MOFCOM, MIIT, GACC and the State Cryptography Administration",
+    "titleOriginal": "关于发布《中华人民共和国两用物项出口管制清单》的公告",
+    "titleOriginalLang": "zh",
+    "titleEn": "Publication of the unified dual-use export control list",
+    "titleEnSource": "self",
+    "documentNumber": "Announcement No. 51 (2024)",
+    "policyStatus": "active",
+    "mechanism": [
+      "export_control"
+    ],
+    "affectedMaterialIds": [
+      "graphite"
+    ],
+    "affectedSectors": [
+      "battery",
+      "industrial"
+    ],
+    "summary": "The unified dual-use export control list takes effect on 1 December 2024. Annex 2 item VIII repeals Announcement No. 39 of 2023. Annex 1 entries 1C108.b and 1C108.c carry forward the specified artificial and natural flake graphite licensing families.",
+    "analyticalSignificance": "Targeted graphite legal-basis crosswalk only, not comprehensive coverage or a newly restricted product family. Official versions show 12 and 15 November document dates; use 15 November conservatively for publication; signature date unresolved.",
+    "supersededByEventId": null,
+    "sourceIds": [
+      "src-mofcom-2024-51",
+      "src-mofcom-2024-51-annex-1",
+      "src-mofcom-2024-51-annex-2"
+    ],
+    "verificationStatus": "provisional",
+    "intakeMode": "backfill",
+    "lifecycle": {
+      "officialPublicationDate": "2024-11-15",
+      "discoveredAt": null,
+      "verifiedAt": null,
       "publishedAt": null
     }
   }

@@ -227,7 +227,9 @@
       "evt-eu-crma-strategic-projects-2025-03",
       "evt-us-chips-usar-2026",
       "evt-ca-trail-strategic-metals-2026",
-      "evt-eu-crma-strategic-projects-2026-10"
+      "evt-eu-crma-strategic-projects-2026-10",
+      "evt-cn-mofcom-72-2025",
+      "evt-cn-mofcom-59-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -267,7 +269,9 @@
       "evt-us-dod-5n-germanium-2024",
       "evt-us-dow-5n-germanium-2025",
       "evt-ca-trail-strategic-metals-2026",
-      "evt-eu-crma-strategic-projects-2026-10"
+      "evt-eu-crma-strategic-projects-2026-10",
+      "evt-cn-mofcom-72-2025",
+      "evt-cn-mofcom-59-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -314,7 +318,10 @@
       "evt-eu-crma-strategic-projects-2026-10",
       "evt-br-bndes-finep-minerals-2025",
       "evt-us-exim-critical-minerals-2026-08",
-      "china-rare-earth-suspension-extension-2026-11"
+      "china-rare-earth-suspension-extension-2026-11",
+      "evt-cn-mofcom-72-2025",
+      "evt-cn-mofcom-59-2026",
+      "evt-cn-dual-use-list-2024"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",
@@ -520,7 +527,9 @@
       "evt-us-exim-stibnite-2026",
       "evt-us-dow-arr-antimony-2025",
       "evt-us-dow-usac-antimony-2026",
-      "evt-us-doe-byproduct-pilots-selections-2026"
+      "evt-us-doe-byproduct-pilots-selections-2026",
+      "evt-cn-mofcom-72-2025",
+      "evt-cn-mofcom-59-2026"
     ],
     "sourceIds": [
       "src-iea-critical-minerals",

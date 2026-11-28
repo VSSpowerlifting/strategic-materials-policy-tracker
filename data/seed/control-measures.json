@@ -2394,6 +2394,13 @@
         "sourceId": "src-mofcom-39",
         "until": null,
         "note": "本公告自2023年12月1日起正式实施。"
+      },
+      {
+        "status": "revoked",
+        "date": "2024-12-01",
+        "until": null,
+        "sourceId": "src-mofcom-2024-51-annex-2",
+        "note": null
       }
     ],
     "evidence": [
@@ -2412,6 +2419,15 @@
         ],
         "evidence": "explicit",
         "locator": "Items 2 and 9",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2024-51-annex-2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Annex 2, item VIII",
         "note": null
       }
     ],
@@ -2502,6 +2518,13 @@
         "sourceId": "src-mofcom-39",
         "until": null,
         "note": "本公告自2023年12月1日起正式实施。"
+      },
+      {
+        "status": "revoked",
+        "date": "2024-12-01",
+        "until": null,
+        "sourceId": "src-mofcom-2024-51-annex-2",
+        "note": null
       }
     ],
     "evidence": [
@@ -2531,9 +2554,109 @@
         "evidence": "ambiguous",
         "locator": "Preamble; Items 1 and 9",
         "note": "Stages read from the item list: natural flake graphite (天然鳞片石墨) is a mined concentrate; spherical and expanded graphite and high-purity synthetic graphite materials are processed products. The announcement names items, not stages."
+      },
+      {
+        "sourceId": "src-mofcom-2024-51-annex-2",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Annex 2, item VIII",
+        "note": null
       }
     ],
     "notes": "Replaces the 2006 temporary graphite measure, which Item 9 repeals from the same date."
+  },
+  {
+    "id": "ctl-cn-list-2024-graphite-licensing",
+    "eventId": "evt-cn-dual-use-list-2024",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "1C108.b and 1C108.c",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "Artificial graphite meeting all three criteria in 1C108.b and natural flake graphite and its products in 1C108.c.",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "1C108.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C108.c",
+        "role": "legal_scope"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020"
+    ],
+    "legalBasisAsStated": null,
+    "modifiesMeasureIds": [
+      "ctl-cn-graphite-2023-export-licensing"
+    ],
+    "modifiesExternalInstruments": [],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-2024-51-annex-1",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "status",
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Annex 1, entries 1C108.b and 1C108.c",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2024-51-annex-2",
+        "supports": [
+          "modified_measures"
+        ],
+        "evidence": "explicit",
+        "locator": "Annex 2, item VIII",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2024-51",
+        "supports": [
+          "legal_basis"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative paragraph, opening legal-basis sentence",
+        "note": null
+      }
+    ],
+    "notes": null,
+    "statusHistory": [
+      {
+        "status": "in_force",
+        "date": "2024-12-01",
+        "until": null,
+        "sourceId": "src-mofcom-2024-51-annex-1",
+        "note": null
+      }
+    ]
   },
   {
     "id": "ctl-cn-ree-2025-04-customs-declaration",
@@ -5063,6 +5186,13 @@
         "sourceId": "src-mofcom-72",
         "until": "2026-11-27",
         "note": "自即日起至2026年11月27日，商务部公告2024年第46号第二款暂停实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2026-11-28",
+        "until": "2027-01-27",
+        "sourceId": "src-mofcom-2026-59",
+        "note": "经批准，自2026年11月28日起至2027年1月27日，商务部公告2024年第46号（《关于加强相关两用物项对美国出口管制的公告》）第二款暂停实施。"
       }
     ],
     "evidence": [
@@ -5084,6 +5214,15 @@
       },
       {
         "sourceId": "src-mofcom-72",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2026-59",
         "supports": [
           "status"
         ],
@@ -5138,6 +5277,13 @@
         "sourceId": "src-mofcom-72",
         "until": "2026-11-27",
         "note": "自即日起至2026年11月27日，商务部公告2024年第46号第二款暂停实施。"
+      },
+      {
+        "status": "suspended",
+        "date": "2026-11-28",
+        "until": "2027-01-27",
+        "sourceId": "src-mofcom-2026-59",
+        "note": "经批准，自2026年11月28日起至2027年1月27日，商务部公告2024年第46号（《关于加强相关两用物项对美国出口管制的公告》）第二款暂停实施。"
       }
     ],
     "evidence": [
@@ -5159,6 +5305,15 @@
       },
       {
         "sourceId": "src-mofcom-72",
+        "supports": [
+          "status"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative sentence",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2026-59",
         "supports": [
           "status"
         ],
