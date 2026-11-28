@@ -2568,6 +2568,97 @@
     "notes": "Replaces the 2006 temporary graphite measure, which Item 9 repeals from the same date."
   },
   {
+    "id": "ctl-cn-list-2024-graphite-licensing",
+    "eventId": "evt-cn-dual-use-list-2024",
+    "measureType": "export_licensing",
+    "direction": "export",
+    "clause": "1C108.b and 1C108.c",
+    "targetScopes": [
+      "all_jurisdictions"
+    ],
+    "targetJurisdictions": [],
+    "targetEntities": [],
+    "targetEndUsersAsStated": [],
+    "targetEndUsesAsStated": [],
+    "materialIds": [
+      "graphite"
+    ],
+    "materialAttribution": "tracked_only",
+    "untrackedMaterialsAsStated": [],
+    "productScopeAsStated": "Artificial graphite meeting all three criteria in 1C108.b and natural flake graphite and its products in 1C108.c.",
+    "productCodes": [
+      {
+        "system": "cn_control_number",
+        "code": "1C108.b",
+        "role": "legal_scope"
+      },
+      {
+        "system": "cn_control_number",
+        "code": "1C108.c",
+        "role": "legal_scope"
+      }
+    ],
+    "controlledItemTypes": [
+      "goods"
+    ],
+    "controlledStages": [],
+    "legalBasisEventIds": [
+      "evt-cn-ecl-2020"
+    ],
+    "legalBasisAsStated": null,
+    "modifiesMeasureIds": [
+      "ctl-cn-graphite-2023-export-licensing"
+    ],
+    "modifiesExternalInstruments": [],
+    "evidence": [
+      {
+        "sourceId": "src-mofcom-2024-51-annex-1",
+        "supports": [
+          "measure_type",
+          "direction",
+          "clause",
+          "targets",
+          "materials",
+          "product_scope",
+          "product_codes",
+          "status",
+          "item_scope"
+        ],
+        "evidence": "explicit",
+        "locator": "Annex 1, entries 1C108.b and 1C108.c",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2024-51-annex-2",
+        "supports": [
+          "modified_measures"
+        ],
+        "evidence": "explicit",
+        "locator": "Annex 2, item VIII",
+        "note": null
+      },
+      {
+        "sourceId": "src-mofcom-2024-51",
+        "supports": [
+          "legal_basis"
+        ],
+        "evidence": "explicit",
+        "locator": "Operative paragraph, opening legal-basis sentence",
+        "note": null
+      }
+    ],
+    "notes": null,
+    "statusHistory": [
+      {
+        "status": "in_force",
+        "date": "2024-12-01",
+        "until": null,
+        "sourceId": "src-mofcom-2024-51-annex-1",
+        "note": null
+      }
+    ]
+  },
+  {
     "id": "ctl-cn-ree-2025-04-customs-declaration",
     "eventId": "china-rare-earth-controls-2025-04",
     "measureType": "customs_enforcement",
@@ -5779,86 +5870,5 @@
       }
     ],
     "notes": "Sec. 2 defines critical minerals by the USGS list plus uranium, and derivative products to include permanent magnets. Only the materials the order names are attributed."
-  },
-  {
-    "id": "ctl-cn-list-2024-graphite-licensing",
-    "eventId": "evt-cn-dual-use-list-2024",
-    "measureType": "export_licensing",
-    "direction": "export",
-    "clause": "1C108.b and 1C108.c",
-    "targetScopes": [
-      "all_jurisdictions"
-    ],
-    "targetJurisdictions": [],
-    "targetEntities": [],
-    "targetEndUsersAsStated": [],
-    "targetEndUsesAsStated": [],
-    "materialIds": [
-      "graphite"
-    ],
-    "materialAttribution": "tracked_only",
-    "untrackedMaterialsAsStated": [],
-    "productScopeAsStated": "Artificial graphite meeting all three criteria in 1C108.b and natural flake graphite and its products in 1C108.c.",
-    "productCodes": [
-      {
-        "system": "cn_control_number",
-        "code": "1C108.b",
-        "role": "legal_scope"
-      },
-      {
-        "system": "cn_control_number",
-        "code": "1C108.c",
-        "role": "legal_scope"
-      }
-    ],
-    "controlledItemTypes": [
-      "goods"
-    ],
-    "controlledStages": [],
-    "legalBasisEventIds": [
-      "evt-cn-ecl-2020"
-    ],
-    "legalBasisAsStated": null,
-    "modifiesMeasureIds": [
-      "ctl-cn-graphite-2023-export-licensing"
-    ],
-    "modifiesExternalInstruments": [],
-    "evidence": [
-      {
-        "sourceId": "src-mofcom-2024-51-annex-1",
-        "supports": [
-          "measure_type",
-          "direction",
-          "clause",
-          "targets",
-          "materials",
-          "product_scope",
-          "product_codes",
-          "status"
-        ],
-        "evidence": "explicit",
-        "locator": "Annex 1, entries 1C108.b and 1C108.c",
-        "note": null
-      },
-      {
-        "sourceId": "src-mofcom-2024-51-annex-2",
-        "supports": [
-          "modified_measures"
-        ],
-        "evidence": "explicit",
-        "locator": "Annex 2, item VIII",
-        "note": null
-      }
-    ],
-    "notes": null,
-    "statusHistory": [
-      {
-        "status": "in_force",
-        "date": "2024-12-01",
-        "until": null,
-        "sourceId": "src-mofcom-2024-51-annex-1",
-        "note": null
-      }
-    ]
   }
 ]
