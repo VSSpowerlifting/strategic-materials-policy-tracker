@@ -66,3 +66,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Check built markets CSV against pinned observations
+        run: python3 scripts/check-markets-csv-parity.py .next/server/app/api/export/markets.csv.body
