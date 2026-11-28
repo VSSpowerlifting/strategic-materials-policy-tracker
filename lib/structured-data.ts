@@ -14,6 +14,26 @@ import { jurisdictionLabels } from "./labels";
 import type { PolicyEvent, Source } from "./types";
 import { getAllEvents, getAllJurisdictions, getAllMaterials } from "./data";
 
+/** The company, as the publisher of a record or the creator of the dataset. */
+export function publisherJsonLd() {
+  return { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url };
+}
+
+/**
+ * The company on its own, for the About page. It states the name, the legal name, the founder and what the
+ * company works on. It names no clients, staff, prices or regulated services, because none of those is claimed.
+ */
+export function organizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    ...publisherJsonLd(),
+    slogan: site.descriptor,
+    description: site.description,
+    founder: { "@type": "Person", name: site.founder },
+    knowsAbout: ["export controls", "critical minerals", "industrial policy", "public financing", "strategic materials"],
+  };
+}
+
 export function datasetJsonLd() {
   const events = getAllEvents();
   return {
@@ -22,13 +42,13 @@ export function datasetJsonLd() {
     name: site.name,
     // The earlier publishing name, so citations and indexes made under it still resolve to this dataset.
     alternateName: site.formerName,
-    description: site.description,
+    description: site.recordDescription,
     url: site.url,
     version: site.version,
     dateModified: site.revisedOn,
     license: "https://creativecommons.org/licenses/by/4.0/",
     isAccessibleForFree: true,
-    creator: { "@type": "Organization", name: site.name },
+    creator: publisherJsonLd(),
     keywords: [
       "rare earth elements",
       "critical minerals",
@@ -81,7 +101,7 @@ export function eventJsonLd(event: PolicyEvent, sources: Source[]) {
     // The government issues the instrument; this project only publishes the
     // record describing it.
     creator: { "@type": "GovernmentOrganization", name: event.issuingBody },
-    publisher: { "@type": "Organization", name: site.name },
+    publisher: publisherJsonLd(),
     url: `${site.url}/events/${event.id}`,
     abstract: event.summary,
     isBasedOn: sources.map((s) => ({

@@ -1,3 +1,9 @@
+## 2026-11-28 — Intelligence, Research and Advisory presentation (draft PR, not merged)
+
+- Branch `claude/stratellar-transformation-c8404d`, from `main` at cc3b881. Presentation, navigation and copy only: no seed data, export, API, snapshot, research text or review record changed. New pages `/intelligence`, `/advisory` and `/contact`; the header reads Intelligence, Research, Advisory, About with Explore and Markets as tools. Every inquiry is an email through the existing contact address.
+- `site.boundary` in `lib/site.ts` is the one sentence stating what Stratellar does not provide. Advisory questions are labelled illustrative and formats representative. Controls figures on `/intelligence` are read from the snapshot manifest. Screenshots in `docs/design/reviews/firm-first-capabilities/`.
+- Checks (28 November 2026): `validate`, `typecheck`, `build` pass; `lint` 0 errors (28 warnings that predate the branch); tests 1,391/1,391; `editorial:check`: "no published research page or review record changed". Chromium at 1280, 768 and 375: no overflow, heading order, anchors, mail links, console clean. Not tested: real screen readers, Safari, Firefox, real touch devices. Founder decisions on licence wording, the contact address and the governance-document edits are listed in the PR.
+
 ## 2026-11-27 — Targeted Controls release preparation
 
 - Founder approved the AI-assisted editorial recommendations for the targeted No. 59/graphite update. [Release decision and remaining gates](docs/analysis/controls-targeted-release-decision-2026-11-27.md). Formal named-human source review is not yet recorded; no public seed promotion or new issued feed has occurred.

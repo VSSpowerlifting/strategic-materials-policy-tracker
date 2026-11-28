@@ -5,6 +5,9 @@ import { site } from "./lib/site";
 const migratedPages = [
   "/",
   "/about",
+  "/advisory",
+  "/contact",
+  "/intelligence",
   "/actors",
   "/actors/:code",
   "/capital",

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   // `absolute`: the root layout's title template does not reach the page of its own segment.
   title: { absolute: `${site.name}: ${site.descriptor}` },
   description:
-    "Original research and source-linked data on export controls, public financing and industrial projects in strategic-material supply chains.",
+    "Source-linked records, original research and scoped analysis of export controls, public financing and industrial projects in strategic-material supply chains.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name}: ${site.descriptor}`,
     description:
-      "Research on strategic-materials policy, financing and industrial development.",
+      "Intelligence, research and advisory on strategic-materials policy, capital and industrial projects.",
   },
 };
 
@@ -52,6 +52,34 @@ const featured = [
     date: "2026-11-03",
     title: "Tungsten Supply Security",
     href: "/research/tungsten-supply-security",
+  },
+] as const;
+
+/**
+ * The three capabilities, each with the same anatomy: what it is, what exists today, and where to go. Plain
+ * statements only: no figures, clients or prices belong here.
+ */
+const capabilities = [
+  {
+    href: "/intelligence",
+    name: "Intelligence",
+    what: "Structured, source-linked records of policy actions, public financing and industrial projects.",
+    today: "Controls, the clause-level dataset of export, import, investment and production restrictions, is public and is the first available under a commercial licence.",
+    action: "Records and licensing",
+  },
+  {
+    href: "/research",
+    name: "Research",
+    what: "Original studies of policy measures, public financing and industrial projects, built from primary sources.",
+    today: "Every published study is free to read, with its sources and method.",
+    action: "Research library",
+  },
+  {
+    href: "/advisory",
+    name: "Advisory",
+    what: "Founder-led analysis for one decision, scoped individually and taken on selectively.",
+    today: "Research and analysis only. Stratellar provides no legal, investment or transaction services.",
+    action: "Scope and boundaries",
   },
 ] as const;
 
@@ -89,11 +117,11 @@ export default function Home() {
       <Container width="wide" className="pb-12 pt-14 sm:pb-16 sm:pt-20 lg:pt-24">
         <div className="title-block settle max-w-5xl">
           <h1 className="display-1 max-w-[15em] text-foreground">
-            Research on critical-minerals policy, public finance and industrial projects
+            Intelligence, research and advisory on strategic-materials policy, capital and industrial projects
           </h1>
           <p className="standfirst mt-7 max-w-2xl">
-            Original analysis built on a source-linked database of export controls, government financing and
-            project milestones, from the official document to its current status.
+            Stratellar maintains source-linked records of export controls, public financing and industrial
+            projects, publishes original research on them, and takes on individually scoped analysis.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link href="/research" className="research-button">Read research</Link>
@@ -101,7 +129,7 @@ export default function Home() {
           </div>
           <p className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-1 font-display text-sm text-muted">
             <span>
-              By <Link href="/about" className="link-quiet text-foreground">Benjamin Yang</Link>
+              Founded and led by <Link href="/about" className="link-quiet text-foreground">{site.founder}</Link>
             </span>
             <span>
               Last revised <time dateTime={site.revisedOn}>{formatDateLong(site.revisedOn)}</time>
@@ -109,6 +137,25 @@ export default function Home() {
           </p>
         </div>
       </Container>
+
+      {/* The three capabilities, stated once before the work that supports them. */}
+      <section aria-labelledby="capabilities-heading" className="border-t border-border-strong bg-card">
+        <Container width="wide" className="py-12 sm:py-16">
+          <h2 id="capabilities-heading" className="font-display text-base font-semibold">Capabilities</h2>
+          <ul className="m-0 mt-6 grid list-none gap-x-10 gap-y-10 p-0 md:grid-cols-3">
+            {capabilities.map((c) => (
+              <li key={c.href} className="flex min-w-0 flex-col border-t border-border-strong pt-4">
+                <h3 className="display-3 text-foreground">{c.name}</h3>
+                <p className="mt-3 font-display text-[0.9375rem] leading-7 text-foreground">{c.what}</p>
+                <p className="mt-2 font-display text-sm leading-6 text-muted">{c.today}</p>
+                <p className="mt-auto pt-2 font-display text-sm">
+                  <Link href={c.href} className="inline-flex min-h-11 items-center text-accent underline underline-offset-4">{c.action}</Link>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
 
       <FeaturedCase />
 
@@ -300,18 +347,12 @@ export default function Home() {
             </div>
 
             <div className="min-w-0 lg:border-l lg:border-border-strong lg:pl-12">
-              <h2 className="font-display text-base font-semibold">Research inquiries</h2>
+              <h2 className="font-display text-base font-semibold">Contact</h2>
               <p className="mt-4 font-display text-[0.9375rem] leading-7 text-muted">
-                For research collaboration or a commissioned analysis of critical-minerals policy or finance,
-                write to Benjamin Yang.
+                Licence terms, advisory briefs, research questions and corrections go to the founder by email.
               </p>
               <p className="mt-5">
-                <a
-                  href="mailto:ben.yang@gwmail.gwu.edu?subject=Stratellar%20research%20inquiry"
-                  className="research-button-secondary"
-                >
-                  ben.yang@gwmail.gwu.edu
-                </a>
+                <Link href="/contact" className="research-button-secondary">Contact Stratellar</Link>
               </p>
             </div>
           </div>

@@ -2,18 +2,30 @@
  * Single source of truth for site identity, navigation, and the footer
  * disclaimers.
  *
- * Stratellar is the publishing name. It is a brand, not a statement about a
- * legal entity: nothing here or in the site copy should describe Stratellar as
- * incorporated, as a firm with clients, or as a licensed adviser.
+ * Stratellar is the name used in public copy; Stratellar LLC is the company
+ * behind it. Site copy may name the company and describe its three
+ * capabilities (Intelligence, Research, Advisory). It must not name or imply
+ * clients, describe staff the company does not have, or present Stratellar as
+ * a licensed or regulated adviser: no legal, investment, engineering, lobbying
+ * or transaction services.
  */
 export const site = {
   name: "Stratellar",
   shortName: "Stratellar",
+  /** The company. Used in the footer, About, the contact page and publisher metadata; never as a replacement for `name`. */
+  legalName: "Stratellar LLC",
+  founder: "Benjamin Yang",
+  /** The one statement of what Stratellar is not. Render this sentence; do not reword it per page. */
+  boundary:
+    "Stratellar is not a licensed or regulated adviser and provides no legal, investment, engineering, lobbying or transaction services.",
   /** Sits under or beside the name wherever the name appears without context (lockups, cards, titles). */
   descriptor: "Strategic Materials Intelligence",
   tagline: "Materials. Policy. Capital.",
   description:
-    "Research and source-linked data on the policy, financing and industrial projects that shape strategic-material supply chains.",
+    "An independent strategic-materials intelligence and advisory firm: source-linked records, published research and scoped analysis of policy, capital and industrial execution.",
+  /** Describes the public record itself (dataset metadata), as distinct from the company. */
+  recordDescription:
+    "Source-linked data on the policy, financing and industrial projects that shape strategic-material supply chains.",
   /**
    * The name the project published under until the Stratellar launch. Kept for
    * provenance only: releases issued before the change carry this imprint in
@@ -180,16 +192,43 @@ export const publicationNav = [
 ] as const;
 
 /**
- * The four destinations in the header. Research and Markets are publications; Explore gathers the record
- * journeys behind one entry (`/explore`); About carries the people, the method and the evidence pages.
- * The journeys keep their own landing routes and URLs: this is a grouping, not a move.
+ * The four destinations on the header's centre line: the three capabilities, then the company. Intelligence
+ * describes the records and how they are licensed; Research is the library; Advisory describes scoped work;
+ * About carries the company, the method and the evidence pages.
  */
 export const sections = [
+  { href: "/intelligence", label: "Intelligence" },
   { href: "/research", label: "Research" },
-  { href: "/explore", label: "Explore" },
-  { href: "/markets", label: "Markets" },
+  { href: "/advisory", label: "Advisory" },
   { href: "/about", label: "About" },
 ] as const;
+
+/**
+ * The working tools, beside search in the header: Explore gathers the record journeys behind one entry
+ * (`/explore`) and Markets is the separately maintained price layer. The journeys keep their own landing
+ * routes and URLs: this is a grouping, not a move.
+ */
+export const toolsNav = [
+  { href: "/explore", label: "Explore" },
+  { href: "/markets", label: "Markets" },
+] as const;
+
+/**
+ * Where commercial and research correspondence goes. One mailbox, the founder's; each pathway sets its own
+ * subject line so a message arrives sorted. There is no form, portal or sales system behind these links.
+ */
+export const contact = {
+  email: "ben.yang@gwmail.gwu.edu",
+  subjects: {
+    licence: "Stratellar licence inquiry",
+    advisory: "Stratellar advisory brief",
+    research: "Stratellar research and corrections",
+  },
+} as const;
+
+/** A `mailto:` link to the contact mailbox with the subject line for one pathway. */
+export const inquiryHref = (kind: keyof typeof contact.subjects) =>
+  `mailto:${contact.email}?subject=${encodeURIComponent(contact.subjects[kind])}`;
 
 /** The journey that explains where claims come from. It sits under About; the other four sit under Explore. */
 export const EVIDENCE_JOURNEY_HREF = "/sources";
@@ -220,9 +259,12 @@ export const primaryNav = nav.filter((i) =>
 
 /** Pages reachable from the footer and sitemap but kept out of the crowded header. */
 export const secondaryNav = [
+  { href: "/intelligence", label: "Intelligence" },
   { href: "/research", label: "Research" },
+  { href: "/advisory", label: "Advisory" },
   { href: "/saved", label: "Saved" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ] as const;
 
 /** The journey that owns `pathname`, if any. */
@@ -234,11 +276,18 @@ export const journeyFor = (pathname: string) => {
 /** Journeys reached through Explore: every journey except Evidence. */
 export const exploreJourneys = journeys.filter((j) => j.href !== EVIDENCE_JOURNEY_HREF);
 
-/** Which of the four header sections `pathname` belongs to, or undefined on the overview. */
-export const sectionFor = (pathname: string): (typeof sections)[number]["href"] | undefined => {
+/**
+ * Which header destination `pathname` belongs to (one of the four sections or one of the two tool
+ * entries), or undefined on the overview. Contact sits under About.
+ */
+export const sectionFor = (
+  pathname: string,
+): (typeof sections)[number]["href"] | (typeof toolsNav)[number]["href"] | undefined => {
+  if (isActivePath(pathname, "/intelligence")) return "/intelligence";
   if (isActivePath(pathname, "/research")) return "/research";
+  if (isActivePath(pathname, "/advisory")) return "/advisory";
   if (isActivePath(pathname, "/markets")) return "/markets";
-  if (isActivePath(pathname, "/about")) return "/about";
+  if (isActivePath(pathname, "/about") || isActivePath(pathname, "/contact")) return "/about";
   const journey = journeyFor(pathname);
   if (journey) return journey.href === EVIDENCE_JOURNEY_HREF ? "/about" : "/explore";
   if (["/explore", "/search", "/saved"].some((h) => isActivePath(pathname, h))) return "/explore";

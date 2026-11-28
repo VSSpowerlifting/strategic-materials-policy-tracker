@@ -11,7 +11,7 @@ Version 1.0 · 24 November 2026 · See the [production cutover record](STRATELLA
 | Source of truth in code | `lib/site.ts` (name, descriptor, tagline), `lib/brand-mark.ts` (mark), `app/globals.css` (colour), `docs/design/publication-tokens.json` (off-site colour) |
 | Asset build | `npm run brand:build` regenerates the brand artwork and the copies the site serves |
 
-Stratellar is a publishing name. It is not described anywhere as an incorporated company, a firm with clients or a licensed adviser. Trademark clearance and domain acquisition are separate launch dependencies and are not established by this document.
+The company is Stratellar LLC; public copy uses "Stratellar" and gives the legal name in the footer, About, contact and publisher metadata. Copy does not name or imply clients, describe staff the company does not have, or present Stratellar as a licensed or regulated adviser. (Until 28 November 2026 this document described Stratellar only as a publishing name.) Trademark clearance and domain acquisition are separate launch dependencies and are not established by this document.
 
 ![Brand overview](../../brand/brand-overview.png)
 

@@ -4,7 +4,7 @@
 
 **Live site → https://stratellar.com**
 
-Stratellar is the publishing name of the project. The [cutover record](docs/brand/STRATELLAR_CUTOVER.md) describes support for existing links and saved events. Research released before the change keeps its original imprint in its downloadable files. The identity is documented in the [brand system](docs/brand/STRATELLAR_BRAND_SYSTEM.md).
+Stratellar is published by Stratellar LLC. The [cutover record](docs/brand/STRATELLAR_CUTOVER.md) describes support for existing links and saved events. Research released before the change keeps its original imprint in its downloadable files. The identity is documented in the [brand system](docs/brand/STRATELLAR_BRAND_SYSTEM.md).
 
 This is an economic-security **policy** product, not a price forecaster, a mining-economics model, or a generic dashboard. Every record resolves to at least one source in the register — primary official text wherever it is available, with anything less marked as such; every framing label is anchored to a quoted passage in the original language; nothing is scored on an invented 0–100 scale.
 
@@ -210,7 +210,7 @@ Live counts are on the [coverage dashboard](https://stratellar.com/coverage) rat
 
 ## Usage & citation
 
-The data is provided as-is for research and journalism. Categorical labels are interpretive judgements anchored to the cited sources, not legal determinations. Quotations are reproduced from the linked originals under fair use for commentary — please cite the original publisher as well as this database.
+The public data is free to use under CC BY 4.0 with attribution, provided as-is; a written commercial licence is a separate agreement. Categorical labels are interpretive judgements anchored to the cited sources, not legal determinations. Quotations are reproduced from the linked originals under fair use for commentary — please cite the original publisher as well as this database.
 
 Cite the database and new research as Stratellar. The site's record pages and the BibTeX, RIS and CSL-JSON endpoints generate citations in that form. A study released before the name change is cited with the imprint printed in its files, Strategic Materials Policy Tracker; its research page prints that citation. Record identifiers, citation keys, API paths and dataset versions are unchanged, so references made under the earlier name still resolve.
 

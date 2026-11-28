@@ -2,12 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHeading } from "@/components/ui/container";
 import { formatDateLong } from "@/lib/format";
+import { InquiryLink } from "@/components/inquiry-link";
 import { site } from "@/lib/site";
+import { jsonLdScript, organizationJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About Stratellar and its researcher, Benjamin Yang.",
+  description:
+    "Stratellar LLC is an independent strategic-materials intelligence and advisory firm, founded and led by Benjamin Yang.",
+  alternates: { canonical: "/about" },
 };
+
+/** The three capabilities, in the order the header lists them. */
+const capabilities = [
+  { href: "/intelligence", label: "Intelligence", note: "Source-linked records of policy actions, public financing and industrial projects. Controls is the first dataset available under a commercial licence." },
+  { href: "/research", label: "Research", note: "Original studies, free to read, each with its sources and method." },
+  { href: "/advisory", label: "Advisory", note: "Founder-led analysis for one decision, scoped individually and taken on selectively." },
+] as const;
 
 /** Where the evidence behind the research is kept. Each entry is an existing page at its existing URL. */
 const evidence = [
@@ -20,23 +31,26 @@ const evidence = [
 export default function AboutPage() {
   return (
     <Container className="py-12 sm:py-20">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(organizationJsonLd()) }} />
       <PageHeading
         title="About Stratellar"
-        lead="Independent research by Benjamin Yang on strategic-materials policy, financing and industrial development."
+        lead={`${site.legalName} is an independent strategic-materials intelligence and advisory firm, founded and led by ${site.founder}.`}
       />
 
       <div className="mx-auto mt-12 max-w-[38rem] space-y-6 text-[1.0625rem] leading-8">
         <p>
-          Stratellar publishes research and data on strategic materials. It connects
-          government measures, financial commitments and industrial projects, and its
-          database records legal status, financing terms and the primary sources
+          Stratellar follows strategic materials from policy to capital to industrial execution, and to what
+          those facts mean for a commercial decision. It connects government measures, financial commitments
+          and industrial projects, and its records carry legal status, financing terms and the primary sources
           behind each entry.
         </p>
         <p>
-          Benjamin Yang created and maintains Stratellar while studying international affairs
-          at George Washington University. The research examines how public policy and
-          capital shape investment decisions and industrial execution across strategic
-          supply chains.
+          Benjamin Yang founded Stratellar and leads it while studying international affairs at George
+          Washington University. The founder maintains the records, writes the research and carries out the advisory work.
+        </p>
+        <p>
+          The public record and the published studies are not sponsored. Their sources, method and coverage
+          limits are published with them. {site.boundary}
         </p>
         <p className="text-muted">
           Coverage is selective. Government and company disclosures are attributed to
@@ -48,7 +62,23 @@ export default function AboutPage() {
         </p>
       </div>
 
-      <section aria-labelledby="evidence-heading" className="mt-16">
+      <section aria-labelledby="capabilities-heading" className="mt-16">
+        <h2 id="capabilities-heading" className="border-b border-border-strong pb-3 font-display text-base font-semibold">
+          Capabilities
+        </h2>
+        <ul className="m-0 grid list-none gap-x-10 p-0 md:grid-cols-3">
+          {capabilities.map((c) => (
+            <li key={c.href} className="border-b border-border">
+              <Link href={c.href} className="group block py-5">
+                <span className="display-3 block text-foreground group-hover:text-accent">{c.label}</span>
+                <span className="mt-1 block font-display text-sm leading-6 text-muted">{c.note}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="evidence-heading" className="mt-14">
         <h2 id="evidence-heading" className="border-b border-border-strong pb-3 font-display text-base font-semibold">
           Evidence
         </h2>
@@ -67,17 +97,13 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section aria-labelledby="contact-heading" className="mt-14 grid gap-8 border-t border-border-strong pt-8 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
-        <div>
-          <h2 id="contact-heading" className="font-display text-base font-semibold">Research inquiries</h2>
-          <p className="mt-3 max-w-xl font-display text-[0.9375rem] leading-7 text-muted">
-            For research collaboration or a commissioned analysis of critical-minerals policy or finance,
-            write to Benjamin Yang.
-          </p>
-        </div>
-        <a href="mailto:ben.yang@gwmail.gwu.edu?subject=Stratellar%20research%20inquiry" className="research-button-secondary">
-          ben.yang@gwmail.gwu.edu
-        </a>
+      <section aria-labelledby="contact-heading" className="mt-14 border-t border-border-strong pt-8">
+        <h2 id="contact-heading" className="font-display text-base font-semibold">Contact</h2>
+        <p className="mt-3 max-w-xl font-display text-[0.9375rem] leading-7 text-muted">
+          Licence terms, advisory briefs, research questions and corrections go to the founder by email. The{" "}
+          <Link href="/contact" className="link-quiet text-foreground">contact page</Link> lists each route.
+        </p>
+        <InquiryLink kind="research" label="Email Stratellar" className="mt-5" />
       </section>
 
       <nav aria-label="More about Stratellar" className="mt-12 flex flex-wrap gap-x-7 gap-y-3 border-t border-border pt-6 font-display text-sm text-muted">

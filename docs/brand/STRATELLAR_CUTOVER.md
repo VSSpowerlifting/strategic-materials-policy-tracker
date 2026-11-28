@@ -9,6 +9,8 @@
 
 Stratellar is a publishing name. Preliminary checks included the USPTO wordmark search and public uses of similar names. Formal trademark clearance is a separate matter.
 
+*Addendum, 28 November 2026.* The paragraph above records the position at cutover. Public copy now names the company, Stratellar LLC, in the footer, About, contact and publisher metadata. The rules on what copy may claim are in `AGENTS.md` and the brand system.
+
 ## Historical links and browser storage
 
 The [original host](https://strategic-materials-policy-tracker.vercel.app) remains assigned to the platform. Next.js redirects an explicit list of public page paths to the apex with 308 responses and retains query strings. API, citation and export endpoints, downloadable research files and metadata assets continue serving directly on both hosts.
