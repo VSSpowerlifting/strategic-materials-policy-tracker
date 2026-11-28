@@ -6,7 +6,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   EVIDENCE_JOURNEY_HREF, exploreJourneys, headerNav, isActivePath as isActive, isNavCurrent as isCurrent,
-  journeyFor, journeys, sectionFor, sections, site,
+  journeyFor, journeys, sectionFor, sections, site, toolsNav,
 } from "@/lib/site";
 import { formatDate } from "@/lib/format";
 import { Container } from "@/components/ui/container";
@@ -131,6 +131,26 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-1 justify-self-end">
+            {/* The working tools sit apart from the four destinations: quieter, beside search. */}
+            <nav aria-label="Tools" className="hidden items-center md:flex">
+              {toolsNav.map((item) => {
+                const current = section === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={ariaCurrent(pathname, item.href, current)}
+                    className={cn(
+                      "inline-flex h-10 items-center px-2 font-display text-sm text-muted transition-colors hover:text-foreground lg:px-2.5",
+                      current && "text-foreground underline decoration-foreground decoration-1 underline-offset-[6px]",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+              <span aria-hidden className="mx-1.5 h-4 w-px bg-border-strong" />
+            </nav>
             <Link
               href="/search"
               aria-label={`Search ${site.name}`}
@@ -251,7 +271,8 @@ export function SiteHeader() {
           </div>
         ) : null}
 
-        {/* Below md: the four destinations, with the record journeys listed under Explore, then utilities. The
+        {/* Below md: the four destinations, then the tools (the record journeys under Explore, and
+            Markets), then utilities. The
             menu sits below the sticky bar (4rem) and, inside a journey, the views row (2.5rem), plus their
             borders; its height leaves room for both so its last items can always scroll into view. */}
         <nav
@@ -271,10 +292,42 @@ export function SiteHeader() {
                 </Link>
               </li>
               <li>
+                <Link href="/intelligence" onClick={closeMenu} aria-current={ariaCurrent(pathname, "/intelligence", section === "/intelligence")} className="block py-3.5 font-editorial text-xl text-foreground">
+                  Intelligence
+                </Link>
+              </li>
+              <li>
                 <Link href="/research" onClick={closeMenu} aria-current={ariaCurrent(pathname, "/research", section === "/research")} className="block py-3.5 font-editorial text-xl text-foreground">
                   Research
                 </Link>
               </li>
+              <li>
+                <Link href="/advisory" onClick={closeMenu} aria-current={ariaCurrent(pathname, "/advisory", section === "/advisory")} className="block py-3.5 font-editorial text-xl text-foreground">
+                  Advisory
+                </Link>
+              </li>
+              <li className="py-3.5">
+                <Link href="/about" onClick={closeMenu} aria-current={ariaCurrent(pathname, "/about", section === "/about")} className="block font-editorial text-xl text-foreground">
+                  About
+                </Link>
+                <ul className="mt-2 grid grid-cols-2 gap-x-4">
+                  {(journeys.find((j) => j.href === EVIDENCE_JOURNEY_HREF)?.views ?? []).map((view) => (
+                    <li key={view.href}>
+                      <Link href={view.href} onClick={closeMenu} aria-current={ariaCurrent(pathname, view.href, isActive(pathname, view.href))} className={cn("block py-2 font-display text-[0.9375rem] text-muted", isActive(pathname, view.href) && "text-foreground")}>
+                        {view.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+              <li>
+                <Link href="/contact" onClick={closeMenu} aria-current={pathname === "/contact" ? "page" : undefined} className="block py-3.5 font-editorial text-xl text-foreground">
+                  Contact
+                </Link>
+              </li>
+            </ul>
+            <p id={`${menuId}-tools`} className="mt-6 border-t border-border-strong pt-4 font-display text-xs text-muted">Tools</p>
+            <ul aria-labelledby={`${menuId}-tools`} className="divide-y divide-border">
               <li className="py-3.5">
                 <Link href="/explore" onClick={closeMenu} aria-current={ariaCurrent(pathname, "/explore", section === "/explore")} className="block font-editorial text-xl text-foreground">
                   Explore
@@ -296,20 +349,6 @@ export function SiteHeader() {
                 <Link href="/markets" onClick={closeMenu} aria-current={ariaCurrent(pathname, "/markets", section === "/markets")} className="block py-3.5 font-editorial text-xl text-foreground">
                   Markets
                 </Link>
-              </li>
-              <li className="py-3.5">
-                <Link href="/about" onClick={closeMenu} aria-current={ariaCurrent(pathname, "/about", section === "/about")} className="block font-editorial text-xl text-foreground">
-                  About
-                </Link>
-                <ul className="mt-2 grid grid-cols-2 gap-x-4">
-                  {(journeys.find((j) => j.href === EVIDENCE_JOURNEY_HREF)?.views ?? []).map((view) => (
-                    <li key={view.href}>
-                      <Link href={view.href} onClick={closeMenu} aria-current={ariaCurrent(pathname, view.href, isActive(pathname, view.href))} className={cn("block py-2 font-display text-[0.9375rem] text-muted", isActive(pathname, view.href) && "text-foreground")}>
-                        {view.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
               </li>
             </ul>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border-strong pt-4 font-display text-sm">
