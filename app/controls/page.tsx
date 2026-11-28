@@ -54,6 +54,14 @@ export default function ControlsPage() {
       </p>
       <p className="mt-1 max-w-3xl font-display text-xs leading-5 text-faint">Statuses as of {formatDate(asOf)}, the date through which published legal instruments are incorporated. An entry dated later is shown as scheduled, not as effective.</p>
 
+      <section aria-labelledby="change-briefs-heading" className="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-border-strong bg-plate px-4 py-5 sm:px-6">
+        <div>
+          <h2 id="change-briefs-heading" className="font-semibold">Controls change briefs</h2>
+          <p className="mt-1 text-sm text-muted">Compare dated clause standings and take the supporting sources into your own analysis.</p>
+        </div>
+        <Link href="/controls/changes" className="research-button-secondary">Open change briefs</Link>
+      </section>
+
       <PageContents
         className="mt-8"
         items={[

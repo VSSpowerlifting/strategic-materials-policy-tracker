@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container, PageHeading } from "@/components/ui/container";
 import { getDatasetSummary } from "@/lib/data";
 import { formatDate } from "@/lib/format";
@@ -128,6 +129,7 @@ export default function DataPage() {
           <p className="mt-2 text-sm text-muted">
             Status as of <time dateTime={site.legalStatusAsOf}>{formatDate(site.legalStatusAsOf)}</time> · Selective coverage
           </p>
+          <Link href="/controls/changes" className="link-quiet mt-2 inline-block text-sm">See a worked Controls comparison</Link>
         </div>
         <a
           href="/api/export/controls-snapshot.zip"
